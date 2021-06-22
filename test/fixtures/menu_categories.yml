@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  menu_name: MyString
+  available_time_begin: 2021-06-22 13:33:55
+  available_time_end: 2021-06-22 13:33:55
+  active: false
+
+two:
+  menu_name: MyString
+  available_time_begin: 2021-06-22 13:33:55
+  available_time_end: 2021-06-22 13:33:55
+  active: false
