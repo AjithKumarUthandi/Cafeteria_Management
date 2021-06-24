@@ -1,0 +1,8 @@
+<!-- menu_category views also this -->
+<div>
+  <% MenuCategory.get_menuCategories.each do |menu| %>
+    <%= render partial: "menu-section", locals: {
+      menu: menu
+    }%>
+  <% end %>
+</div>

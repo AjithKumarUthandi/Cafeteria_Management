@@ -1,0 +1,23 @@
+<section class="MenuSection">
+  <div class="MenuSectionTitle">
+    <p class="MenuSectionTitle-text">
+      <%= menu.menu_name %>
+      <%= link_to "see all", menu_items_path(menu_id: menu.id) %>
+    </p>
+    <div class="MenuItemSection">
+      <% t = 1
+        MenuItem.get_items(menu.id).each do |item|
+      %>
+          <%= render partial: "menu_items/menuItems-section", locals: {
+            item: item
+          }%>
+          <% t+=1
+             if t>3
+              break
+             end
+          %>
+
+      <% end %>
+    </div>
+  </div>
+</section>
