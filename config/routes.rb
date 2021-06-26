@@ -5,5 +5,10 @@ Rails.application.routes.draw do
   resources :addresses
   resources :menu_categories
   resources :menu_items
-  # get "all/:id"
+  post "users/login", to: "users#login"
+
+  #sessions
+  get "/signin" => "sessions#new", as: :new_sessions
+  post "/signin" => "sessions#create", as: :sessions
+  delete "/signout", to: "sessions#destroy", as: :destroy_session
 end

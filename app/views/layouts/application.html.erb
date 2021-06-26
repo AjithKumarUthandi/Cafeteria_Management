@@ -13,8 +13,27 @@
   <body>
     <nav class="navbar navbar-dark bg-dark">
       <%= link_to "Trend", "/", class: "navbar-brand"%>
+      <% if @current_user %>
+        <div class="dropdown">
+          <button class="dropbtn"><%= @current_user.first_name %></button>
+          <div class="dropdown-content">
+            <%= link_to "sign-out", destroy_session_path, method: "delete" %>
+          </div>
+        </div>
+      <% elsif request.path!="/signin"%>
+        <%= link_to "sign-in", new_sessions_path %>
+      <% end %>
     </nav>
 
+    <% if flash[:error] %>
+      <p class="Flash-error">
+        <%= flash[:error] %>
+      </p>
+    <% end %>
+
     <%= yield %>
+
+
+
   </body>
 </html>
