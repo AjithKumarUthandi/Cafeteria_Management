@@ -1,0 +1,31 @@
+<div class="offcanvas-header">
+  <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body">
+  <% user =  @current_user%>
+  <%= form_with(model: user) do |form| %>
+    <div class="profile-section">
+      <div>
+        <p><%= form.label :first_name %></p>
+        <%= form.text_field :first_name,id: "firstname" %>
+      </div>
+      <div>
+        <p><%= form.label :last_name %></p>
+        <%= form.text_field :last_name,id: "lastname" %>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <p><%= form.label :email %></p>
+      <%= form.text_field :email %>
+    </div>
+    <hr>
+    <div>
+      <p><%= form.label :phone_number %></p>
+      <%= form.number_field :phone_number %>
+    </div>
+    <hr>
+    <%= form.submit :update %>
+  <% end %>
+</div>
