@@ -1,0 +1,10 @@
+.title-style{
+  font-family: "Space Mono", monospace;
+  font-style: oblique;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.position-section {
+  margin-right: 20px;
+}

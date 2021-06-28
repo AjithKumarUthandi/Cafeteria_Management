@@ -1,22 +1,35 @@
-<p class="NewUsers-title">Sign-in!</p>
-
-<section class="UserNew">
-  <%= form_with url: sessions_path do |form| %>
-  <div class="Form-section">
-    <p class="FormInput-label">email:</p>
-    <%= form.email_field :email, class: "Form-input" %>
+<div class="modal-dialog modal-dialog-centered ">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="log-inModalLabel">Sign-in!</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <section class="UserNew">
+        <%= form_with url: sessions_path do |form| %>
+          <div class="Form-section">
+            <p class="FormInput-label">email:</p>
+            <%= form.email_field :email, class: "Form-input" %>
+          </div>
+          <div class="Form-section">
+            <p class="FormInput-label">Password:</p>
+            <%= form.password_field :password, class: "Form-input" %>
+          </div>
+          <br>
+          <br>
+          Create a new user <%= link_to "sign-up", new_user_path %> here
+          <br>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="Form-section">
+              <%= form.submit "Sign-in!", class: "Form-submit" %>
+            </div>
+          </div>
+        <% end %>
+      </section>
+      <br>
+      <br>
+    </div>
   </div>
-  <div class="Form-section">
-    <p class="FormInput-label">Password:</p>
-    <%= form.password_field :password, class: "Form-input" %>
-  </div>
-  <div class="Form-section">
-    <%= form.submit "Sign-in!", class: "Form-submit" %>
-  </div>
-  <% end %>
-</section>
-<br>
-<br>
-<h3>
-  Create a account <%= link_to "sign-up", new_user_path %>
-</h3>
+</div>
