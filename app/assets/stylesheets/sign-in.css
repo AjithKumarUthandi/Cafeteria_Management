@@ -1,0 +1,53 @@
+.closeButton{
+  width: auto;
+  padding: 8px 25px 8px;
+  background-color: #f44336;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: -30px;
+}
+
+.input-section {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.log-inLabel {
+  font-weight: bold;
+}
+
+.inputContainer {
+  padding: 15px 5px 4px;
+}
+
+.loginButton {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.loginButton:hover {
+  opacity: 0.8;
+}
+
+.ariel_family{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.signupButton{
+  padding: 15px 5px 0px;
+}
+
+.signin-footer {
+  padding-bottom: 11px;
+}

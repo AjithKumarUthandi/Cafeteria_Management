@@ -1,30 +1,38 @@
 <div class="modal-dialog modal-dialog-centered ">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="log-inModalLabel">Sign-in!</h5>
+      <h5 class="modal-title ariel_family" id="log-inModalLabel">Log-in</h5>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
+    <% if flash[:error] %>
+      <p class="Flash-error">
+        <%= flash[:error] %>
+      </p>
+    <% end %>
       <section class="UserNew">
         <%= form_with url: sessions_path do |form| %>
-          <div class="Form-section">
-            <p class="FormInput-label">email:</p>
-            <%= form.email_field :email, class: "Form-input" %>
+          <div class="Form-section inputContainer">
+            <p class="FormInput-label log-inLabel ariel_family">Email</p>
+            <%= form.email_field :email, class: "Form-input input-section", autofocus: true %>
           </div>
-          <div class="Form-section">
-            <p class="FormInput-label">Password:</p>
-            <%= form.password_field :password, class: "Form-input" %>
+          <div class="Form-section inputContainer">
+            <p class="FormInput-label log-inLabel ariel_family">Password</p>
+            <%= form.password_field :password, class: "Form-input input-section" %>
           </div>
           <br>
           <br>
-          Create a new user <%= link_to "sign-up", new_user_path %> here
+          <div class="Form-section">
+            <%= form.submit "Log-in", class: "Form-submit loginButton" %>
+          </div>
+          <br>
+          <br>
+          <hr>
+          <h3 class="signupButton ariel_family"> Create a new user <%= link_to "sign-up", new_user_path %> here </h3>
           <br>
           <br>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <div class="Form-section">
-              <%= form.submit "Sign-in!", class: "Form-submit" %>
-            </div>
+            <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Close</button>
           </div>
         <% end %>
       </section>

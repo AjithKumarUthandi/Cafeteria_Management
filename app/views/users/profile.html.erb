@@ -1,3 +1,8 @@
+<% if flash[:error] %>
+  <p class="Flash-error">
+    <%= flash[:error] %>
+  </p>
+<% end %>
 
 <div class="profile-section">
   <div class="details-section">
@@ -13,7 +18,7 @@
 
 
 <div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="delete_accountLabel" aria-hidden="true">
-   <%= render partial: "password_authendicate" %>
+  <%= render partial: "password_authendicate" %>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

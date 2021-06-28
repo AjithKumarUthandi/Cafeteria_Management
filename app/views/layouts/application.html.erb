@@ -12,34 +12,27 @@
   </head>
 
   <body>
-    <% if (request.path!="/edit") %>
-      <nav class="navbar navbar-light bg-light">
-        <%= link_to "Trend", "/", class: "navbar-brand title-style"%>
-        <% if @current_user %>
-          <div class="dropdown position-section">
-            <button class="dropbtn"><%= @current_user.first_name %></button>
-            <div class="dropdown-content">
-              <%= link_to "Profile", profile_user_path%>
-              <%= link_to "Log-out", destroy_session_path, method: "delete" %>
+    <% if (request.path!="/signin") && (request.path!="/edit")%>
+        <nav class="navbar navbar-light bg-light">
+          <%= link_to "Trend", "/", class: "navbar-brand title-style"%>
+          <% if @current_user %>
+            <div class="dropdown position-section">
+              <button class="dropbtn"><%= @current_user.first_name %></button>
+              <div class="dropdown-content">
+                <%= link_to "Profile", profile_user_path%>
+                <%= link_to "Log-out", destroy_session_path, method: "delete" %>
+              </div>
             </div>
-          </div>
-        <% elsif request.path!="/signin"%>
-          <button type="button" class="btn btn-primary position-section" data-bs-toggle="modal" data-bs-target="#log-inModal">
-            Log-in
-          </button>
+          <% elsif request.path!="/signin"%>
+            <button type="button" class="btn btn-primary position-section" data-bs-toggle="modal" data-bs-target="#log-inModal">
+              Log-in
+            </button>
 
-          <div class="modal fade" id="log-inModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="log-inModalLabel" aria-hidden="true"></div>
-        <% end %>
-      </nav>
+            <div class="modal fade " id="log-inModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="log-inModalLabel" aria-hidden="true"></div>
+          <% end %>
+        </nav>
     <% end %>
 
-    <div class="container-fluid navbar-brand">
-      <% if flash[:error] %>
-        <p class="Flash-error">
-          <%= flash[:error] %>
-        </p>
-      <% end %>
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>
