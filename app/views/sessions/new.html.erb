@@ -10,20 +10,20 @@
         <%= flash[:error] %>
       </p>
     <% end %>
-      <section class="UserNew">
+      <section>
         <%= form_with url: sessions_path do |form| %>
-          <div class="Form-section inputContainer">
-            <p class="FormInput-label log-inLabel ariel_family">Email</p>
-            <%= form.email_field :email, class: "Form-input input-section", autofocus: true %>
+          <div class="inputContainer">
+            <p class="log-inLabel ariel_family">Email</p>
+            <%= form.email_field :email, class: "input-section", autofocus: true, placeholder: "xxx@email.com"  %>
           </div>
-          <div class="Form-section inputContainer">
-            <p class="FormInput-label log-inLabel ariel_family">Password</p>
-            <%= form.password_field :password, class: "Form-input input-section" %>
+          <div class="inputContainer">
+            <p class="log-inLabel ariel_family">Password</p>
+            <%= form.password_field :password, class: "input-section",placeholder: "Password" %>
           </div>
           <br>
           <br>
           <div class="Form-section">
-            <%= form.submit "Log-in", class: "Form-submit loginButton" %>
+            <%= form.submit "Log-in", class: "loginButton" %>
           </div>
           <br>
           <br>

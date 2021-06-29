@@ -1,29 +1,35 @@
-<p class="NewUsers-title">Welcome new user!</p>
-
-<section class="UserNew">
-  <%= form_with url: users_path do |form| %>
-    <div class="Form-section">
-      <p class="FormInput-label">First name:</p>
-      <%= form.text_field :first_name, class: "Form-input" %>
-    </div>
-    <div class="Form-section">
-      <p class="FormInput-label">Last name:</p>
-      <%= form.text_field :last_name, class: "Form-input" %>
-    </div>
-    <div class="Form-section">
-      <p class="FormInput-label">email:</p>
-      <%= form.email_field :email, class: "Form-input" %>
-    </div>
-    <div class="Form-section">
-      <p class="FormInput-label">Phone number:</p>
-      <%= form.number_field :phone_number, class: "Form-input"%>
-    </div>
-    <div class="Form-section">
-      <p class="FormInput-label">Password:</p>
-      <%= form.password_field :password, class: "Form-input" %>
-    </div>
-    <div class="Form-section">
-      <%= form.submit "Sign-up!", class: "Form-submit" %>
-    </div>
-  <% end %>
-</section>
+<div class="sign-upContainer">
+  <p class="ariel_family modal-title" style="text-align:center">Sign-up</p>
+  <% if flash[:error] %>
+      <p class="Flash-error">
+        <%= flash[:error] %>
+      </p>
+    <% end %>
+  <section class="container">
+    <%= form_with url: users_path do |form| %>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">First name * </p>
+        <%= form.text_field :first_name, class: "input-section", autofocus: true, placeholder: "First name" %>
+      </div>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">Last name</p>
+        <%= form.text_field :last_name, class: "input-section",placeholder: "Last name" %>
+      </div>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">Email *</p>
+        <%= form.email_field :email, class: "input-section", placeholder: "xxx@email.com" %>
+      </div>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">Phone number *</p>
+        <%= form.number_field :phone_number, class: "input-section", placeholder: "xxx-xxx-xxxx"%>
+      </div>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">Password *</p>
+        <%= form.password_field :password, class: "input-section", placeholder: "must be 8 to 16 letters" %>
+      </div>
+      <div class="inputContainer">
+        <%= form.submit "Sign-up!", class: "loginButton" %>
+      </div>
+    <% end %>
+  </section>
+</div>
