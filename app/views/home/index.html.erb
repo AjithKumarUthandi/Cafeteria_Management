@@ -1,8 +1,21 @@
-<!-- menu_category views also this -->
-<div>
+<nav id="navbar-example2" class="navbar-light bg-light px-3 menuCategory-list">
+  <ul class="nav-pills">
+    <% MenuCategory.get_menuCategories.each do |menu| %>
+      <li class="nav-item">
+        <%= link_to menu.menu_name, "##{menu.id}"%>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
+<div  class="scrollspy-example scroll-items" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0">
   <% MenuCategory.get_menuCategories.each do |menu| %>
-    <%= render partial: "menu-section", locals: {
-      menu: menu
-    }%>
-  <% end %>
+    <h4 id = <%= menu.id %> class="category-name"><br><br><%=menu.menu_name%></h4>
+    <% MenuItem.get_items(menu.id).each do |item| %>
+      <%= render partial: "menu_items/menuItems-section", locals: {
+          item: item
+        }%>
+    <% end %>
+    <hr>
+  <%end%>
 </div>

@@ -16,4 +16,4 @@ import "bootstrap"
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
-require("packs/loadHtml")
+require("packs/loadHtml.js.erb")

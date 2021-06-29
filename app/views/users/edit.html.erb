@@ -1,5 +1,5 @@
 <div class="offcanvas-header">
-  <h5 id="offcanvasRightLabel"> Edit profile </h5>
+  <h5 id="offcanvasRightLabel ariel_family"> Edit profile </h5>
   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body">
@@ -7,25 +7,25 @@
   <%= form_with(model: user) do |form| %>
     <div class="profile-section">
       <div>
-        <p><%= form.label :first_name %></p>
-        <%= form.text_field :first_name,id: "firstname" %>
+        <p><%= form.label :first_name, class:"log-inLabel ariel_family" %></p>
+        <%= form.text_field :first_name,id: "firstname",class: "input-section" %>
       </div>
       <div>
-        <p><%= form.label :last_name %></p>
-        <%= form.text_field :last_name,id: "lastname" %>
+        <p><%= form.label :last_name, class:"log-inLabel ariel_family" %></p>
+        <%= form.text_field :last_name,id: "lastname",class: "input-section" %>
       </div>
     </div>
     <hr>
     <div>
-      <p><%= form.label :email %></p>
-      <%= form.text_field :email %>
+      <p><%= form.label :email, class:"log-inLabel ariel_family" %></p>
+      <%= form.text_field :email,class: "input-section" %>
     </div>
     <hr>
     <div>
-      <p><%= form.label :phone_number %></p>
-      <%= form.number_field :phone_number %>
+      <p><%= form.label :phone_number, class:"log-inLabel ariel_family" %></p>
+      <%= form.number_field :phone_number,class: "input-section" %>
     </div>
     <hr>
-    <%= form.submit :update %>
+    <%= form.submit :update, class: "loginButton" %>
   <% end %>
 </div>

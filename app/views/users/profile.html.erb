@@ -18,7 +18,10 @@
 
 
 <div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="delete_accountLabel" aria-hidden="true">
-  <%= render partial: "password_authendicate" %>
+  <%= render partial: "password_authendicate", locals: {
+    path: user_path(@current_user.id),
+    url_method: :delete
+    } %>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

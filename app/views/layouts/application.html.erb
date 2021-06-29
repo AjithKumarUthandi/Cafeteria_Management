@@ -13,7 +13,7 @@
 
   <body>
     <% if (request.path!="/signin") && (request.path!="/edit")%>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar sticky-top  navbar-light bg-light">
           <%= link_to "Trend", "/", class: "navbar-brand title-style"%>
           <% if @current_user %>
             <div class="dropdown position-section">
