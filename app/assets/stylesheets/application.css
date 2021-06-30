@@ -14,3 +14,11 @@
  *= require_tree .
  *= require_self
  */
+
+.flexDisplay{
+  display: flex;
+}
+
+.padding_top{
+  margin-top: 60px;
+}

@@ -1,4 +1,16 @@
-<div>
-  <%= link_to "#{item.item_name}", "menu_item/#{item.id}"%>
+<div class="padding_top container">
+  <div class="row">
+    <div class="col flexDisplay itemNameButton-section">
+      <div class="itemName-section">
+        <%= item.item_name.capitalize() %>
+        <br>
+      </div>
 
+    </div>
+    <div class="col second-col">
+      <%= link_to "Add","#" , type:"button", class: "itemButton-section"%>
+    </div>
+  </div>
+  <p class="rupee itemDetail-section"> ₹ <%= item.price %> </p>
+  <p class="itemDetail-section description"> <%=  item.description %> </p>
 </div>

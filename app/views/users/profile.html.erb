@@ -1,29 +1,31 @@
-<% if flash[:error] %>
-  <p class="Flash-error">
-    <%= flash[:error] %>
-  </p>
-<% end %>
+<div class="padding_top">
+  <% if flash[:error] %>
+    <p class="Flash-error">
+      <%= flash[:error] %>
+    </p>
+  <% end %>
 
-<div class="profile-section">
-  <div class="details-section">
-    <h1><%= @current_user.first_name + " " + @current_user.last_name%></h1>
-    <h5><%= @current_user.email %></h5>
-    <h5><%= @current_user.phone_number %></h5>
+  <div class="profile-section">
+    <div class="details-section">
+      <h1><%= @current_user.first_name + " " + @current_user.last_name%></h1>
+      <h5><%= @current_user.email %></h5>
+      <h5><%= @current_user.phone_number %></h5>
+    </div>
+
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit</button>|
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_account" >Destroy</button>
   </div>
 
 
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit</button>|
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_account" >Destroy</button>
-</div>
+  <div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="delete_accountLabel" aria-hidden="true">
+    <%= render partial: "password_authendicate", locals: {
+      path: user_path(@current_user.id),
+      url_method: :delete
+      } %>
+  </div>
 
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 
-<div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="delete_accountLabel" aria-hidden="true">
-  <%= render partial: "password_authendicate", locals: {
-    path: user_path(@current_user.id),
-    url_method: :delete
-    } %>
-</div>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-
+  </div>
 </div>

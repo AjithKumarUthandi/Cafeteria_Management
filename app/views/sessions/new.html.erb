@@ -1,15 +1,14 @@
-<div class="modal-dialog modal-dialog-centered ">
+<div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title ariel_family" id="log-inModalLabel">Log-in</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-    <% if flash[:error] %>
-      <p class="Flash-error">
-        <%= flash[:error] %>
-      </p>
-    <% end %>
+      <% if flash[:error] %>
+        <p class="Flash-error">
+          <%= flash[:error] %>
+        </p>
+      <% end %>
       <section>
         <%= form_with url: sessions_path do |form| %>
           <div class="inputContainer">
@@ -29,15 +28,9 @@
           <br>
           <hr>
           <h3 class="signupButton ariel_family"> Create a new user <%= link_to "sign-up", new_user_path %> here </h3>
-          <br>
-          <br>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary closeButton" data-bs-dismiss="modal">Close</button>
-          </div>
         <% end %>
       </section>
-      <br>
-      <br>
+      <br><br>
     </div>
   </div>
 </div>

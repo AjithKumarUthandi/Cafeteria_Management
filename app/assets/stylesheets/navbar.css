@@ -5,6 +5,10 @@
   font-size: 30px;
 }
 
+.title-style:hover, .title-style:active{
+  font-size: 34px;
+}
+
 .position-section {
   margin-right: 20px;
 }

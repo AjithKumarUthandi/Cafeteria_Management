@@ -1,6 +1,6 @@
 .menuCategory-list {
+  margin-top: 60px;
   margin-left: -10px;
-  margin-top: 0px;
   overflow: auto;
   white-space: nowrap;
 }
@@ -9,7 +9,7 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 25%;
+  width: 20%;
   background-color: #f1f1f1;
   position: fixed;
   height: 100%;
@@ -34,13 +34,33 @@ li a:hover:not(.active) {
 }
 
 .scroll-items {
-  margin-top: 0px;
-  margin-left:25%;
+  margin-left:20%;
+  margin-right:350px;
   padding:1px 16px;
   height:1000px;
 }
 
 .category-name {
+  padding:10px;
   font-family: Ubuntu, sans-serif;
   font-size: 46px;
+}
+
+
+hr.lineBetweenCategories {
+  overflow: visible; /* For IE */
+  padding: 0;
+  border: none;
+  border-top: medium double rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+hr.lineBetweenCategories:after {
+  content: "§";
+  display: inline-block;
+  position: relative;
+  top: -0.7em;
+  font-size: 1.5em;
+  padding: 0 0.25em;
+  background: white;
 }

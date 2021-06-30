@@ -1,11 +1,4 @@
 $(document).ready(function(){
 
    $('#offcanvasRight').load("/edit");
-   $('#log-inModal').load("/signin");
-
-   $('.menu_cat').click(function(){
-      item_id = Number(this.id);
-      console.log("hello"+item_id);
-      console.log('<%= @current_user.id %>')
-   });
 });
