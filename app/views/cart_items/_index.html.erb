@@ -1,0 +1,8 @@
+<div>
+  <%if @current_user.cart_items.all.empty?() %>
+    <div class="emptyCart">
+      <img class="emptyCartImage" src="https://image.flaticon.com/icons/png/512/102/102661.png">
+      <p class="emptyCartText"> Empty Cart </p>
+    </div>
+  <% end %>
+</div>

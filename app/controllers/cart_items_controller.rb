@@ -1,4 +1,10 @@
 class CartController < ApplicationController
+  skip_before_action :ensure_user_logged_in
+
+  def index
+    current_user
+  end
+
   def create
     item_id = params[:item_id]
     new_cart=CartItem.new(

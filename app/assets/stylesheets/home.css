@@ -47,7 +47,7 @@ li a:hover:not(.active) {
 }
 
 
-hr.lineBetweenCategories {
+.lineBetweenCategories {
   overflow: visible; /* For IE */
   padding: 0;
   border: none;
@@ -55,7 +55,8 @@ hr.lineBetweenCategories {
   color: rgb(0, 0, 0);
   text-align: center;
 }
-hr.lineBetweenCategories:after {
+
+.lineBetweenCategories:after {
   content: "§";
   display: inline-block;
   position: relative;
