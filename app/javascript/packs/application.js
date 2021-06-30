@@ -14,12 +14,11 @@ import Rails from "@rails/ujs"
 //= require_tree.
 
 import "bootstrap"
-// import Turbolinks from "turbolinks"
+import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 global.$ = jQuery;
 
 Rails.start()
-// Turbolinks.start()
+Turbolinks.start()
 ActiveStorage.start()
-require("packs/loadHtml.js.erb")

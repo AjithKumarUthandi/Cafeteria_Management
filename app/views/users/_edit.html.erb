@@ -1,9 +1,8 @@
-<div class="offcanvas-header">
+<div class="offcanvas-header padding_top">
   <h5 id="offcanvasRightLabel ariel_family"> Edit profile </h5>
   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body">
-  <% user =  @current_user%>
   <%= form_with(model: user) do |form| %>
     <div class="profile-section">
       <div>

@@ -14,5 +14,6 @@ class User < ApplicationRecord
   # validates :password, {length: {minimum:8, maximum:16}, format:PASSWORD_REQUIREMENTS, acceptance: { message: 'password must be conatain atleat one character from all symbol' } }
 
   has_many :addresses
+  has_many :cart_items
   has_secure_password
 end

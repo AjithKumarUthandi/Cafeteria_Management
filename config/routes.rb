@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :addresses
   resources :menu_categories
   resources :menu_items
+  resources :cart_items
   # post "users/login", to: "users#login"
 
   #sessions

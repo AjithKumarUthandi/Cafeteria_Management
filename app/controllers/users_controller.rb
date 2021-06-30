@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  skip_before_action :ensure_user_logged_in, only: %i[ new create ]
+  skip_before_action :ensure_user_logged_in
 
 
   def new
     render "users/new"
   end
 
-  #Add a new user
   def create
     new_user = User.new(
       first_name: params[:first_name],
@@ -26,13 +25,11 @@ class UsersController < ApplicationController
   end
 
   def profile
+    current_user
   end
 
-  # def edit
-  # end
-
   def update
-    if( @current_user.update(user_params) )
+    if( current_user.update(user_params) )
       redirect_to "/profile"
     else
       flash[:error] = @current_user.errors.full_messages.join(", ")
@@ -43,7 +40,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user && user.authenticate(params[:password])
-      if(@current_user.role == user.role)
+      if(current_user.role == user.role)
         session[:current_user_id] = nil
         @current_user = nil
       end

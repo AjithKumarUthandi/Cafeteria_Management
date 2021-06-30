@@ -26,6 +26,8 @@
   </div>
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-
+    <%= render partial: "edit", locals: {
+      user: @current_user
+    }%>
   </div>
 </div>
