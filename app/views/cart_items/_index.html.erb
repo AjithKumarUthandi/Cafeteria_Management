@@ -1,8 +1,35 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu|Lora">
 <div>
   <%if @current_user.cart_items.all.empty?() %>
     <div class="emptyCart">
-      <img class="emptyCartImage" src="https://image.flaticon.com/icons/png/512/102/102661.png">
       <p class="emptyCartText"> Empty Cart </p>
+    </div>
+  <% else %>
+    <div class="cart-items">
+      <p class="cartname-text">Cart</p>
+      <p class="cartitem-text"> <%= CartItem.all.count %> Item</p>
+      <hr class="cart-hr">
+      <div class="container">
+        <div class="row">
+          <% total = 0 %>
+          <% @current_user.cart_items.all.each do |item|%>
+            <div class="col">
+              <%= item.menu_item_name.capitalize() %>
+            </div>
+            <div class="col cart-secondCol">
+              <% price = MenuItem.get_price(item.menu_item_id) * item.menu_item_quantity%>
+              ₹ <%= price %>
+              <% total += price%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <hr class="cart-hr">
+      <div class="subtotal">
+        <div class="subtotal-text">Subtotal: <p class="subtotal-price"> ₹ <%= total %> </p> </div>
+        <br><br>
+        <%= link_to  "Place Order", "#",class: "cart-button" %>
+      </div>
     </div>
   <% end %>
 </div>

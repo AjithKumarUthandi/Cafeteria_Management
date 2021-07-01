@@ -11,20 +11,116 @@
   background-color: rgba(248, 247, 247, 0.616);
 }
 
-
-.emptyCartImage{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 40%;
-  width: 50%;
-  height: 50%;
-  opacity:0.4;
-}
-
 .emptyCartText{
    font-size: 40px;
    padding-top: 30px;
    padding-left: 90px;
-   opacity:0.6;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 40%;
+   opacity:0.4;
+}
+
+.cart-items{
+  font-family: Lora, serif;
+  letter-spacing: 3px;
+  padding-left: 19px;
+  height: 80%;
+  width: 350px;
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+.cartname-text {
+  font-size: 36px;
+  font-weight: 800;
+  color: rgb(5, 5, 5);
+}
+
+.cart-secondCol{
+  padding-left:150px;
+}
+
+.cartitem-text{
+  padding-top: 10px;
+  padding-left: 7px;
+  font-size: 14px;
+  color: rgb(5, 5, 5);
+  font-weight: 400;
+}
+
+.cart-hr {
+  color: rgba(128, 132, 136, 0.973);
+  width: 95%;
+}
+
+.subtotal {
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
+.subtotal-text {
+  display: flex;
+  font-weight: bolder;
+}
+
+.subtotal-price{
+  margin-left: 145px;
+}
+
+.cart-button{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 39px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 60px;
+  margin-top: 10px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;;
+}
+
+.cart-button:hover {
+  color: black;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.cartAddMinusbutton{
+  position: relative;
+  margin-left: 250px;
+  border: 1px solid black;
+}
+
+.quantity-section {
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgba(228, 224, 224, 0.61);
+  padding: 8px 8px;
+}
+
+.plusminusbutton {
+  padding: 8px 8px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.plusbutton {
+  color: rgb(5, 228, 5);
+  font-weight: 900;
+}
+
+.minusbutton {
+  color: #ac3939;
 }

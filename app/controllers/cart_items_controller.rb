@@ -1,4 +1,4 @@
-class CartController < ApplicationController
+class CartItemsController < ApplicationController
   skip_before_action :ensure_user_logged_in
 
   def index
@@ -6,11 +6,11 @@ class CartController < ApplicationController
   end
 
   def create
-    item_id = params[:item_id]
+    item = MenuItem.all.find(params[:item_id])
     new_cart=CartItem.new(
-      menu_item_id: item_id
-      menu_item_name: item_id.menu_item_name
-      user_id: @current_user.id
+      menu_item_id: item.id,
+      menu_item_name: item.item_name,
+      user_id: current_user.id
     )
     if(new_cart.save)
       redirect_to "/"
@@ -21,14 +21,16 @@ class CartController < ApplicationController
   end
 
   def update
-    item_id = params[:item_id]
+    item_id = params[:id]
     qty = params[:quantity]
-    item = current_user.cart_items.find(item_id)
-    if qty==0
-      item.menu_item_quantity = qty
-      item.save!
-    else
-      item.destroy
+    if CartItem.exists?(item_id)
+      item = CartItem.find(item_id)
+      if qty.to_i>0
+        item.menu_item_quantity = qty
+        item.save!
+      else
+        item.destroy
+      end
     end
     redirect_to "/"
   end

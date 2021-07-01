@@ -1,9 +1,9 @@
 <div class="padding_top">
   <nav id="navbar-example2" class="navbar-light bg-light px-3 menuCategory-list">
-    <ul class="nav-pills">
+    <ul class="nav-pills sidenav">
       <% MenuCategory.get_menuCategories.each do |menu| %>
         <li class="nav-item">
-          <%= link_to menu.menu_name.capitalize(), "##{menu.id}"%>
+          <%= link_to menu.menu_name.capitalize(), "##{menu.id}", class: "nav-category"%>
         </li>
       <% end %>
     </ul>
@@ -16,7 +16,9 @@
         <%= render partial: "menu_items/menuItems-section", locals: {
             item: item
         }%>
-        <hr class="lineBetweenItems">
+        <% if menu.menu_items.last != item%>
+          <hr class="lineBetweenItems">
+        <%end%>
       <% end %>
       <hr class="lineBetweenCategories">
     <%end%>

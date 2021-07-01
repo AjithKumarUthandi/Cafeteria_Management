@@ -7,8 +7,20 @@
       </div>
 
     </div>
-    <div class="col second-col">
-      <%= link_to "Add","#" , type:"button", class: "itemButton-section"%>
+    <div class="col">
+      <% cart_item_id = @current_user.cart_items.all.find_by(menu_item_id: item.id)%>
+      <% if cart_item_id %>
+        <div class="flexDisplay">
+          <% qty = cart_item_id.menu_item_quantity %>
+          <div class="cartAddMinusbutton flexDisplay" role="group" aria-label="Basic outlined example">
+            <%= link_to "-", cart_item_path(cart_item_id,quantity: qty-1),method: :patch, type: "button", class: "plusminusbutton minusbutton" %>
+            <p class="quantity-section"> <%= qty %> </p>
+            <%= link_to "+", cart_item_path(cart_item_id,quantity: qty+1),method: :patch, type: "button", class: "plusminusbutton plusbutton" %>
+          </div>
+        </div>
+      <%else%>
+        <%= link_to "Add", cart_items_path(item_id: item.id),method: :post , class: "itemButton-section"%>
+      <%end %>
     </div>
   </div>
   <p class="rupee itemDetail-section"> ₹ <%= item.price %> </p>
