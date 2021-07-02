@@ -6,7 +6,7 @@ class CartItemsController < ApplicationController
   end
 
   def create
-    item = MenuItem.all.find(params[:item_id])
+    item = MenuItem.find(params[:item_id])
     new_cart=CartItem.new(
       menu_item_id: item.id,
       menu_item_name: item.item_name,
@@ -35,9 +35,8 @@ class CartItemsController < ApplicationController
     redirect_to "/"
   end
 
-  def destroy
-    items=current_user.cart_items.all
-    items.destroy
+  def destroy_all
+    current_user.cart_items.destroy_all
     redirect_to "/"
   end
 end

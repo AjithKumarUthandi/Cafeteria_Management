@@ -6,8 +6,11 @@
     </div>
   <% else %>
     <div class="cart-items">
-      <p class="cartname-text">Cart</p>
-      <p class="cartitem-text"> <%= CartItem.all.count %> Item</p>
+      <div class="flexDisplay">
+        <p class="cartname-text">Cart</p>
+        <%= link_to "clear", cart_item_path_url, method: :delete, type:"button", class:"clearCart"%>
+      </div>
+      <p class="cartitem-text"> <%= CartItem.all.count %> Item </p>
       <hr class="cart-hr">
       <div class="container">
         <div class="row">
@@ -28,7 +31,17 @@
       <div class="subtotal">
         <div class="subtotal-text">Subtotal: <p class="subtotal-price"> ₹ <%= total %> </p> </div>
         <br><br>
-        <%= link_to  "Place Order", "#",class: "cart-button" %>
+        <%= form_with url: orders_path do |form| %>
+            <p class="selctTitle-text">Address:</p>
+            <%= form.select(:address,
+              options_for_select(@current_user.addresses.collect{ |add| ["#{add.door_no}, #{add.address}, #{add.city} : #{add.postal_code}", add.id] }, class:"optionAddress-section"),
+              {}, { :class => 'selectAddress-section' })
+            %>
+            <p class="selctTitle-text">Payment:</p>
+            <%= select_tag "payment", raw("<option>Cash only</option>"), class:"selectPayment-section", disabled: true%>
+            <%= form.submit "Place Order", class: "cart-button" %>
+
+          <%end%>
       </div>
     </div>
   <% end %>

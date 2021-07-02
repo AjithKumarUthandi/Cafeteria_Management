@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :menu_categories
   resources :menu_items
   resources :cart_items
-  # post "users/login", to: "users#login"
+  delete "/cart_items" => "cart_items#destroy_all", as: :cart_item_path
+
+  resources :orders
+  resources :order_items
 
   #sessions
   get "/signin" => "sessions#new", as: :new_sessions

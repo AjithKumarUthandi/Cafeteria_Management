@@ -124,3 +124,19 @@
 .minusbutton {
   color: #ac3939;
 }
+
+.clearCart{
+  position: absolute;
+  right: 15px;
+  padding: 5px 5px;
+  text-decoration: none;
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  background-color: rgba(247, 97, 97, 0.712);
+}
+
+.clearCart:hover{
+  padding: 8px 8px;
+  color: rgb(252, 252, 252);
+}

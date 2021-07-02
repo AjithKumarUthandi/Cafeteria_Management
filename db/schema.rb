@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_153213) do
+ActiveRecord::Schema.define(version: 2021_07_01_174012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 2021_07_01_153213) do
     t.string "menu_item_name"
     t.integer "menu_item_quantity", default: 1
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_item_id"], name: "index_cart_items_on_menu_item_id"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
@@ -63,13 +61,17 @@ ActiveRecord::Schema.define(version: 2021_07_01_153213) do
     t.string "menu_item_name"
     t.decimal "menu_item_price"
     t.integer "menu_item_quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "address_id", null: false
     t.datetime "created_at"
     t.datetime "delivered_at"
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -87,5 +89,6 @@ ActiveRecord::Schema.define(version: 2021_07_01_153213) do
   add_foreign_key "cart_items", "users"
   add_foreign_key "menu_items", "menu_categories"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
 end
