@@ -9,10 +9,13 @@ Rails.application.routes.draw do
   resources :menu_categories
   resources :menu_items
   resources :cart_items
-  delete "/cart_items" => "cart_items#destroy_all", as: :cart_item_path
+  delete "/cart_items" => "cart_items#destroy_all", as: :cart_deleteitems
+  get "/deleteordered" => "cart_items#deleteordered_all", as: :cart_deleteordereditems
 
   resources :orders
-  resources :order_items
+
+  #order_items
+  get "/create" => "order_items#create", as: :order_items
 
   #sessions
   get "/signin" => "sessions#new", as: :new_sessions

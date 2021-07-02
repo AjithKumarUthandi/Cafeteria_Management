@@ -39,4 +39,9 @@ class CartItemsController < ApplicationController
     current_user.cart_items.destroy_all
     redirect_to "/"
   end
+
+  def deleteordered_all
+    current_user.cart_items.destroy_all
+    redirect_to "/"
+  end
 end

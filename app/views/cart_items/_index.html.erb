@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu|Lora">
+
 <div>
   <%if @current_user.cart_items.all.empty?() %>
     <div class="emptyCart">
@@ -8,7 +8,7 @@
     <div class="cart-items">
       <div class="flexDisplay">
         <p class="cartname-text">Cart</p>
-        <%= link_to "clear", cart_item_path_url, method: :delete, type:"button", class:"clearCart"%>
+        <%= link_to "clear", cart_deleteitems_path, method: :delete, type:"button", class:"clearCart"%>
       </div>
       <p class="cartitem-text"> <%= CartItem.all.count %> Item </p>
       <hr class="cart-hr">
@@ -20,7 +20,7 @@
               <%= item.menu_item_name.capitalize() %>
             </div>
             <div class="col cart-secondCol">
-              <% price = MenuItem.get_price(item.menu_item_id) * item.menu_item_quantity%>
+              <% price = MenuItem.find(item.menu_item_id).price * item.menu_item_quantity%>
               ₹ <%= price %>
               <% total += price%>
             </div>

@@ -1,3 +1,15 @@
+
+<script>
+  $(document).ready(function(){
+      $('input[type="radio"]').click(function(){
+          var inputValue = $(this).attr("value");
+          var targetBox = $("." + inputValue);
+          $(".box").not(targetBox).hide();
+          $(targetBox).show();
+      });
+  });
+</script>
+
 <div class="padding_top">
   <% if flash[:error] %>
     <p class="Flash-error">
@@ -7,14 +19,13 @@
 
   <div class="profile-section">
     <div class="details-section">
-      <h1><%= @current_user.first_name + " " + @current_user.last_name%></h1>
-      <h5><%= @current_user.email %></h5>
-      <h5><%= @current_user.phone_number %></h5>
+      <h1 class="user-name"><%= @current_user.first_name + " " + @current_user.last_name%></h1>
+      <h5 class="user-email"><%= @current_user.email %></h5>
+      <h5 class="user-phone_number">+91-<%= @current_user.phone_number %></h5>
     </div>
 
-
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit</button>|
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_account" >Destroy</button>
+    <button class="btn btn-primary editprofile-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Profile</button>
+    <button type="button" class="btn btn-primary deleteprofile-button" data-bs-toggle="modal" data-bs-target="#delete_account" >Destroy</button>
   </div>
 
 
@@ -30,4 +41,28 @@
       user: @current_user
     }%>
   </div>
+</div>
+
+<div class="profile-sidebar ">
+  <div class="flexDisplay ">
+    <div class="btn-group radio-sidebar" role="group" aria-label="Basic radio toggle button group">
+
+      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio1" value="address" autocomplete="off" >
+      <label class="btn btn-outline-primary profile-radiolabel" for="btnradio1">Address</label>
+
+      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio2" value="order" autocomplete="off">
+      <label class="btn btn-outline-primary profile-radiolabel orderlabel" for="btnradio2">Order </label>
+
+      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio3" value="security" autocomplete="off">
+      <label class="btn btn-outline-primary profile-radiolabel " for="btnradio3">Security</label>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="profile-body">
+  <div class="address box" >You have selected <strong>red radio button</strong> so i am here</div>
+  <div class="order box">You have selected <strong>green radio button</strong> so i am here</div>
+  <div class="security box" >You have selected <strong>blue radio button</strong> so i am here</div>
 </div>

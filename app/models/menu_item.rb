@@ -8,8 +8,4 @@ class MenuItem < ApplicationRecord
   def self.get_items(category_id)
     where("menu_category_id = ? and active ", category_id)
   end
-
-  def self.get_price(item_id)
-    all.find(item_id).price
-  end
 end

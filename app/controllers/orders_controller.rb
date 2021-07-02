@@ -1,4 +1,4 @@
-class OrderController < ApplicationController
+class OrdersController < ApplicationController
   def create
     new_order = Order.new(
       user_id: @current_user.id,
@@ -6,10 +6,10 @@ class OrderController < ApplicationController
       created_at: DateTime.now()
     )
 
-    if(new_user.save)
-      redirect_to order_items_path method: :post
+    if(new_order.save)
+      redirect_to order_items_path(order_id: new_order.id)
     else
-      flash[:error] = new_user.errors.full_messages.join(", ")
+      flash[:error] = new_order.errors.full_messages.join(", ")
       redirect_to "/"
     end
   end
