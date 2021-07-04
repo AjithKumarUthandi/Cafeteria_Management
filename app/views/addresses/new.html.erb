@@ -1,0 +1,42 @@
+<div class="addAddress-container">
+  <h5 class="modal-title ariel_family addAddress-header" id="log-inModalLabel">Add address</h5>
+  <hr>
+  <% if flash[:error] %>
+    <p class="Flash-error">
+      <%= flash[:error] %>
+    </p>
+  <% end %>
+  <section>
+    <%= form_with url: addresses_path, method: :post do |form| %>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">Door no</p>
+        <%= form.text_field :door_no, class: "door_no-section", autofocus: true, placeholder: "Door no/Flat no:"  %>
+      </div>
+      <div class="inputContainer">
+        <p class="log-inLabel ariel_family">Address </p>
+        <%= form.text_field :address, class: "input-section",placeholder: "xxx st / yyy ng" %>
+      </div>
+      <div class="inputContainer ">
+        <p class="log-inLabel ariel_family">City </p>
+        <%= form.text_field :city, class: "city-section",placeholder: "Chennai" %>
+      </div>
+      <div class="inputContainer pincode-section">
+        <p class="log-inLabel ariel_family">Pin Code </p>
+          <%= form.text_field :pin_code, class: "door_no-section pincode-field",placeholder: "600 001" %>
+        <br>
+      </div>
+      <div class="inputContainer state-section">
+        <p class="log-inLabel ariel_family">State </p>
+          <%= form.text_field :state, class: "door_no-section state-field",placeholder: "Tamil nadu" %>
+        <br>
+      </div>
+      <br>
+      <div class="Form-section">
+        <%= form.submit "Add address", class: "loginButton" %>
+      </div>
+      <br>
+      <br>
+      <hr>
+    <% end %>
+  </section>
+</div>

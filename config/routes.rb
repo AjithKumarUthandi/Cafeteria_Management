@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users
   get "/edit" => "users#edit", as: :edit
   get "/profile" => "users#profile", as: :profile_user
+  delete "/change_password" => "users#update_password", as: :change_password
+
 
   resources :addresses
   resources :menu_categories
@@ -21,4 +23,8 @@ Rails.application.routes.draw do
   get "/signin" => "sessions#new", as: :new_sessions
   post "/signin" => "sessions#create", as: :sessions
   delete "/signout", to: "sessions#destroy", as: :destroy_session
+
+  #admin
+  get "/adminmenus" => "admins#menu", as: :admin_menu
+
 end

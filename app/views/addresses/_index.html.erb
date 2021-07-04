@@ -1,0 +1,12 @@
+<div class="addressGrid-container">
+  <div class="addressGrid-item addressAdd">
+    <%= link_to  "Add address", new_address_path ,type:"button", class: "addAddress-text" %>
+  </div>
+
+  <% @current_user.addresses.each do |address| %>
+    <div class="addressGrid-item addressList">
+      <%="#{address.door_no}, #{address.address}, #{address.city} : #{address.postal_code}"%>
+    </div>
+  <%end%>
+
+</div>

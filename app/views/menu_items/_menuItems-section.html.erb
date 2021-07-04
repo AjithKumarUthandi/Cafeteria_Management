@@ -8,8 +8,8 @@
 
     </div>
     <div class="col">
-      <% cart_item_id = @current_user.cart_items.find_by(menu_item_id: item.id)%>
-      <% if cart_item_id %>
+
+      <% if @current_user && cart_item_id=@current_user.cart_items.find_by(menu_item_id: item.id) %>
         <div class="flexDisplay">
           <% qty = cart_item_id.menu_item_quantity %>
           <div class="cartAddMinusbutton flexDisplay" role="group" aria-label="Basic outlined example">
@@ -19,7 +19,11 @@
           </div>
         </div>
       <%else%>
-        <%= link_to "Add", cart_items_path(item_id: item.id),method: :post , class: "itemButton-section"%>
+        <% if @current_user %>
+          <%= link_to "Add", cart_items_path(item_id: item.id),method: :post , class: "itemButton-section"%>
+        <% else %>
+          <%= link_to "Log-in",new_sessions_path , class: "itemButton-section"%>
+        <%end%>
       <%end %>
     </div>
   </div>

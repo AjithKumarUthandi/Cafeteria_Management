@@ -1,0 +1,23 @@
+<div class="mengrid-container">
+    <div>
+      <%=link_to "+ Add new menu","#", class:"Addmenu-text"%>
+    </div>
+    <% MenuCategory.all.each do |menu|%>
+      <div class="menus-text">
+        <p class="menuName"><%=menu.menu_name.capitalize()%></p>
+        <p class="menuItemcount">Items: <%=menu.menu_items.count%></p>
+        <p>
+          <% if menu.active %>
+            <%=link_to "Active","#",class:"activebutton"%>
+          <%else%>
+            <%=link_to "Inactive","#",class:"activebutton inactive"%>
+          <%end%>
+        </p>
+        <p class="viewItem-text"> <%= link_to "View items","#",class:"viewItem-link"%> </p>
+      </div>
+    <% end %>
+</div>
+<!-- <div class="col adminCategory">Column</div>
+<div class="col adminCategory">Column</div>
+<div class="col adminCategory">Column</div>
+<div class="col adminCategory">Column</div> -->

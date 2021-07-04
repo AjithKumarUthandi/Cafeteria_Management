@@ -6,7 +6,7 @@ class OrderItemsController < ApplicationController
         order_id: params[:order_id],
         menu_item_id: item.menu_item_id,
         menu_item_name: item.menu_item_name,
-        menu_item_name: MenuItem.find(item.menu_item_id).price * item.menu_item_quantity,
+        menu_item_price: MenuItem.find(item.menu_item_id).price * item.menu_item_quantity,
         menu_item_quantity: item.menu_item_quantity
       ))
     end

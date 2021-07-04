@@ -3,6 +3,10 @@ class HomeController < ApplicationController
 
   def index
     current_user
-    render "index"
+    if(@current_user && @current_user.role=="admin")
+      render "admins/menu"
+    else
+      render "index"
+    end
   end
 end

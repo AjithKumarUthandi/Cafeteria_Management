@@ -27,3 +27,108 @@
   letter-spacing: 2px;
   font-weight: 600;
 }
+
+/* address */
+.addressGrid-container {
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: auto;
+  padding: 0px;
+  position: absolute;
+  z-index: -1;
+}
+
+.addressGrid-item {
+  background-color: white;
+  padding: 20px ;
+  padding-top: 40px;
+  width: 80%;
+  font-size: 30px;
+  text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif ;
+}
+
+.addressGrid-item:hover {
+  font-size: 33px;
+}
+
+.addAddress-text{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: 25px;
+  font-weight: bold;
+  border: 0;
+  background-color: white;
+}
+
+.addAddress-text:hover {
+  font-size: 30px;
+  border: 0;
+  background-color: white;
+  color: green;
+}
+
+.addressAdd{
+  border:2px solid green;
+}
+
+.addressList {
+  border: 5px solid ;
+  background-color:#669999;
+  color: white;
+}
+
+.addressList:hover {
+  color: rgb(7, 7, 7);
+}
+
+.addAddress-modal {
+  z-index: 1;
+}
+
+/* add address */
+.addAddress-container {
+  position: relative;
+  padding: 30px;
+  padding-top: 11px;
+  width: 40%;
+  border: 1px solid rgb(221, 218, 218);
+  margin-top: 70px;
+  margin-left: 440px;
+  height: 90%;
+  background-color:ghostwhite;
+}
+
+.door_no-section {
+  width: 34%;
+  padding: 12px 15px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.city-section {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+
+
+.pincode-field {
+  width: 50%;
+}
+
+.state-field {
+  width: 50%;
+}
+
+.addAddress-header{
+  font-weight: bold;
+}

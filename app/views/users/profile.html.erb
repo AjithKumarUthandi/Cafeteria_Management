@@ -1,6 +1,7 @@
 
 <script>
   $(document).ready(function(){
+      $(".address").show();
       $('input[type="radio"]').click(function(){
           var inputValue = $(this).attr("value");
           var targetBox = $("." + inputValue);
@@ -11,13 +12,7 @@
 </script>
 
 <div class="padding_top">
-  <% if flash[:error] %>
-    <p class="Flash-error">
-      <%= flash[:error] %>
-    </p>
-  <% end %>
-
-  <div class="profile-section">
+  <div class="profile-section fixed-top" style="z-index: 1;">
     <div class="details-section">
       <h1 class="user-name"><%= @current_user.first_name + " " + @current_user.last_name%></h1>
       <h5 class="user-email"><%= @current_user.email %></h5>
@@ -47,14 +42,14 @@
   <div class="flexDisplay ">
     <div class="btn-group radio-sidebar" role="group" aria-label="Basic radio toggle button group">
 
-      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio1" value="address" autocomplete="off" >
+      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio1" value="address" autocomplete="off" checked>
       <label class="btn btn-outline-primary profile-radiolabel" for="btnradio1">Address</label>
 
-      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio2" value="order" autocomplete="off">
+      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio2" value="order" autocomplete="off"  >
       <label class="btn btn-outline-primary profile-radiolabel orderlabel" for="btnradio2">Order </label>
 
-      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio3" value="security" autocomplete="off">
-      <label class="btn btn-outline-primary profile-radiolabel " for="btnradio3">Security</label>
+      <input type="radio" class="btn-check profile-radiobutton " name="btnradio" id="btnradio3" value="password" autocomplete="off" >
+      <label class="btn btn-outline-primary profile-radiolabel passwordlabel" for="btnradio3">Password</label>
     </div>
   </div>
 </div>
@@ -62,7 +57,39 @@
 
 
 <div class="profile-body">
-  <div class="address box" >You have selected <strong>red radio button</strong> so i am here</div>
-  <div class="order box">You have selected <strong>green radio button</strong> so i am here</div>
-  <div class="security box" >You have selected <strong>blue radio button</strong> so i am here</div>
+  <% if flash[:error] %>
+    <p class="Flash-error">
+      <%= flash[:error] %>
+    </p>
+  <% elsif flash[:info]%>
+    <p class="Flash-info">
+      <%= flash[:info] %>
+    </p>
+  <% end %>
+  <div class="address box" >
+    <%= render partial: "addresses/index"%>
+  </div>
+  <div class="order box">
+    <%= render partial: "orders/index" %>
+  </div>
+  <div class="password box" style="position: fixed;">
+    <%= form_with url: change_password_path, method: :delete do |form| %>
+      <div class="passwordinputContainer">
+        <p class="log-inLabel ariel_family">Old-password</p>
+        <%= form.password_field :old_password, class: "passwordinput-section", autofocus: true, placeholder: "Old-password" %>
+      </div>
+      <div class="passwordinputContainer">
+        <p class="log-inLabel ariel_family">New-password</p>
+        <%= form.password_field :new_password, class: "passwordinput-section",placeholder: "New-password"%>
+      </div>
+      <br>
+      <br>
+      <div class="Form-section">
+        <%= form.submit "Change password", class: "changeButton" %>
+      </div>
+      <br>
+      <br>
+      <hr>
+    <% end %>
+  </div>
 </div>

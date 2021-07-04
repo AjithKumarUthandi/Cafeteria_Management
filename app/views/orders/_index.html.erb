@@ -1,0 +1,46 @@
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <% @current_user.orders.each do |order| %>
+    <div class="accordion-item orderAccordion-item">
+      <h2 class="accordion-header" id="flush-heading<%=order.id%>">
+        <button class="accordion-button collapsed orderAccordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=order.id%>" aria-expanded="false" aria-controls="flush-collapse<%=order.id%>">
+          <div class="flexDisplay">
+            <p class="orderId-text"> Order id: #<%= order.id%> </p>
+            <% if order.delivered_at %>
+              <p class="deliverd-status">Delivered on: <%=order.delivered_at.in_time_zone("Chennai").to_s(:long)%><p>
+            <%else%>
+              <p class="deliverd-status">Status: <p class="deliverd-status pendingStatus">Pending<p></p>
+            <% end %>
+          </div>
+          <div class="orderdetails-text">
+            <%address = Address.find(order.address_id)%>
+            <%= "#{address.door_no}, #{address.address}, #{address.city} : #{address.postal_code}" %>
+          </div>
+          <div class="orderdetails-text flexDisplay">
+             <p class="order_at "> Ordered_at: </p> <%= order.created_at.in_time_zone("Chennai").to_s(:long)%>
+          </div>
+          <p style="color:green" class="orderdetails-text"> View details </p>
+        </button>
+      </h2>
+      <div id="flush-collapse<%=order.id%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=order.id%>" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+            <% items = order.order_items %>
+            <p class="orderitem-count"> Item: <%= items.count %> </p>
+            <hr>
+            <% total = 0%>
+            <% items.each do |item| %>
+              <div class="flexDisplay">
+                <p class="orderitem-name pb-3" > <%= item.menu_item_name.capitalize() %> * <%= item.menu_item_quantity %> </p>
+                <p class="orderitem-price"> ₹ <%= item.menu_item_price %>
+              </div>
+              <% total += item.menu_item_price%>
+            <% end %>
+            <hr>
+            <div class="flexDisplay">
+              <p class="orderitem-count"> Pay via cash</p>
+              <p class="orderitem-bill"> Bill Total <p class="order-total"> ₹ <%= total %></p></p>
+            </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

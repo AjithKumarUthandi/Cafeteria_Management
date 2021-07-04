@@ -45,8 +45,24 @@ class UsersController < ApplicationController
         @current_user = nil
       end
       user.destroy
+      redirect_to "/"
     else
       flash[:error] = "Password is wrong"
+      redirect_to "/profile"
+    end
+  end
+
+  def update_password
+    user=current_user
+    if user && user.authenticate(params[:old_password])
+      user.password = params[:new_password]
+      if(user.save)
+        flash[:info]="Password Changed"
+      else
+        flash[:error]= @current_user.errors.full_messages.join(", ")
+      end
+    else
+      flash[:error]="Invalid password"
     end
     redirect_to "/profile"
   end

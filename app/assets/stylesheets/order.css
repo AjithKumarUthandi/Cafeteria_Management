@@ -1,0 +1,64 @@
+.orderAccordion-item {
+  padding: 40px;
+  width: 70%;
+}
+
+.orderAccordion-button {
+  padding: 20px;
+  display: block;
+}
+
+.orderId-text {
+  font-size: 20px;
+}
+
+.deliverd-status {
+  position: absolute;
+  top: 0px;
+  right: 80px;
+}
+
+.pendingStatus {
+  right: 15px;
+  color: rgb(255, 145, 0);
+}
+
+.orderdetails-text {
+  padding-top: 10px;
+}
+
+.order_at {
+  color: rgba(184, 186, 189, 0.952);
+  padding-right: 4px;
+}
+
+/* order_items */
+
+.orderitem-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.orderitem-price {
+  position: absolute;
+  top: auto;
+  right: 560px;
+}
+
+.orderitem-count {
+  letter-spacing: normal;
+  color: rgb(174, 174, 175);
+}
+
+.orderitem-bill{
+  letter-spacing: normal;
+  position: absolute;
+  margin-left: 600px;
+  font-weight: bold;
+}
+
+.order-total {
+  position: absolute;
+  margin-left: 700px;
+  font-weight: bold;
+}

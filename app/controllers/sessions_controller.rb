@@ -10,15 +10,16 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:current_user_id] = user.id
       redirect_to "/"
-    else
+     else
       flash[:error] = "Your login attempt was invalid. Please retry."
       redirect_to new_sessions_path
     end
   end
 
   def destroy
+    role=current_user.role=="admin"
     session[:current_user_id] = nil
     @current_user = nil
-    redirect_to "/"
+    redirect_to (role)? new_sessions_path :  "/"
   end
 end

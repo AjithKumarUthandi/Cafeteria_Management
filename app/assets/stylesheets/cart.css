@@ -140,3 +140,20 @@
   padding: 8px 8px;
   color: rgb(252, 252, 252);
 }
+
+.addAddress-cart{
+  border: 1px solid rgb(132, 229, 132);
+  color: black;
+  background-color: rgb(123, 243, 123);
+  text-decoration: none;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.addAddress-cart:hover {
+  padding: 13px;
+  font-size: x-large;
+  color: ghostwhite;
+}
