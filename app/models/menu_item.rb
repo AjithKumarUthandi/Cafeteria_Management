@@ -6,6 +6,6 @@ class MenuItem < ApplicationRecord
   belongs_to :menu_category
 
   def self.get_items(category_id)
-    where("menu_category_id = ? and active ", category_id)
+    where("menu_category_id = ? and active and archive_at is null", category_id)
   end
 end

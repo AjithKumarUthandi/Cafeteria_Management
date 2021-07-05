@@ -1,0 +1,26 @@
+<%= form_with  url: menu_categories_path, method: :post, class: "menuview-modal-content menuview-animate" do |form| %>
+    <div class="cancel-imgcontainer">
+      <span onclick="document.getElementById('addnew-menu').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="addMenu-container">
+      <p>Category name * </p>
+      <%= form.text_field :menu_name, class: "addMenu-input-section", type: "text",autofocus: true, placeholder: "Category name", required: true %>
+
+      <p>available_time_begin</p>
+      <%= form.time_field :available_time_begin, class: "addMenu-input-section" %>
+
+      <p>available_time_end</p>
+      <%= form.time_field :available_time_end, class: "addMenu-input-section"%>
+
+      <p class="addMenu-checkbox-text">active <%= form.check_box :active,value: true,class: "addmenu-checkbox" %></p>
+
+
+      <%= form.submit "ADD", class: "addMenu-Button" %>
+
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('addnew-menu').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+<% end %>

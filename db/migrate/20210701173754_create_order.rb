@@ -5,6 +5,7 @@ class CreateOrder < ActiveRecord::Migration[6.1]
       t.references :address, null: false, foreign_key: true
       t.datetime :created_at
       t.datetime  :delivered_at
+      t.datetime :archive_at
     end
   end
 end

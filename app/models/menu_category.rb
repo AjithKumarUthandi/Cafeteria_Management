@@ -3,9 +3,12 @@ class MenuCategory < ApplicationRecord
 
   has_many :menu_items
 
-  def self.get_menuCategories
-    where("active = ?", true)
+  def self.getactive_menuCategories
+    where("active = ? and archive_at is null", true)
   end
 
+  def self.get_menuCategories
+    where("archive_at is null")
+  end
 
 end

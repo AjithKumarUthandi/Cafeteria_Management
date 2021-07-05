@@ -5,6 +5,7 @@ class CreateCartItem < ActiveRecord::Migration[6.1]
       t.string :menu_item_name
       t.integer :menu_item_quantity, :default =>  1
       t.references :user, null: false, foreign_key: true
+      t.datetime :archive_at
     end
   end
 end

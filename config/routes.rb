@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :addresses
   resources :menu_categories
+  patch "/upate_activatemenu/:id" => "menu_categories#active_update", as: :activate_menu
   resources :menu_items
   resources :cart_items
   delete "/cart_items" => "cart_items#destroy_all", as: :cart_deleteitems

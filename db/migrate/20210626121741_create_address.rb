@@ -8,6 +8,7 @@ class CreateAddress < ActiveRecord::Migration[6.1]
       t.string :postal_code
       t.string :state
       t.string :country
+      t.datetime :archive_at
     end
   end
 end

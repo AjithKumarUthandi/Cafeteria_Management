@@ -12,7 +12,13 @@ class ApplicationController < ActionController::Base
 
     current_user_id = session[:current_user_id]
     if current_user_id
-      @current_user = User.find(current_user_id)
+      begin
+        @current_user = User.find(current_user_id)
+      rescue
+        session[:current_user_id]=nil
+        @current_user = nil
+        redirect_to "/"
+      end
     else
       nil
     end

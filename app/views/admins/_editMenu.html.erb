@@ -1,0 +1,13 @@
+<div class="addMenu-container">
+  <p><%= form.label :menu_name%></p>
+  <%= form.text_field :menu_name, class: "addMenu-input-section", type: "text",autofocus: true, placeholder: "Category name", required: true %>
+
+  <p><%= form.label :available_time_begin%></p>
+  <%= form.time_field :available_time_begin, class: "addMenu-input-section" %>
+
+  <p><%= form.label :available_time_end%></p>
+  <%= form.time_field :available_time_end, class: "addMenu-input-section"%>
+
+  <%= form.submit "Edit", class: "addMenu-Button" %>
+
+</div>

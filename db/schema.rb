@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.string "postal_code"
     t.string "state"
     t.string "country"
+    t.datetime "archive_at"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.string "menu_item_name"
     t.integer "menu_item_quantity", default: 1
     t.bigint "user_id", null: false
+    t.datetime "archive_at"
     t.index ["menu_item_id"], name: "index_cart_items_on_menu_item_id"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.time "available_time_begin"
     t.time "available_time_end"
     t.boolean "active"
+    t.datetime "archive_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -50,6 +53,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.string "description"
     t.decimal "price"
     t.boolean "active"
+    t.datetime "archive_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["menu_category_id"], name: "index_menu_items_on_menu_category_id"
@@ -61,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.string "menu_item_name"
     t.decimal "menu_item_price"
     t.integer "menu_item_quantity"
+    t.datetime "archive_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
@@ -71,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.bigint "address_id", null: false
     t.datetime "created_at"
     t.datetime "delivered_at"
+    t.datetime "archive_at"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -82,6 +88,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_174012) do
     t.string "email"
     t.string "role", default: "customer"
     t.string "password_digest"
+    t.datetime "archive_at"
   end
 
   add_foreign_key "addresses", "users"

@@ -5,6 +5,7 @@ class CreateMenuCategories < ActiveRecord::Migration[6.1]
       t.time :available_time_begin
       t.time :available_time_end
       t.boolean :active
+      t.datetime :archive_at
 
       t.timestamps
     end
