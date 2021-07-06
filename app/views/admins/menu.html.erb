@@ -1,7 +1,7 @@
 
 <div class="mengrid-container" style="z-index:-1">
     <div>
-      <a class="Addmenu-text" onclick="document.getElementById('addnew-menu').style.display='block'" style="width:auto;"> + Add new menu </a>
+      <a class="Addmenu-text" onclick="document.getElementById('addnew-menu').style.display='block'" style="width:auto;"> + Add new category </a>
 
     </div>
     <% MenuCategory.get_menuCategories.sort.each do |menu|%>
@@ -23,7 +23,7 @@
             <%=link_to "Inactive",activate_menu_path(menu.id,active: true),method: :patch,class:"activebutton inactive"%>
           <%end%>
         </p>
-        <p class="viewItem-text"> <%= link_to "View items",menu_category_path,class:"viewItem-link"%> </p>
+        <p class="viewItem-text"> <%= link_to "View items",admin_menu_items_path(category_id: menu.id),class:"viewItem-link"%> </p>
       </div>
 
       <div id="edit-menu<%=menu.id%>" class="addMenu-modal">

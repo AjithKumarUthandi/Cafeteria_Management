@@ -13,4 +13,21 @@ class OrdersController < ApplicationController
       redirect_to "/"
     end
   end
+
+  def complete_order
+    order = Order.find(params[:id])
+    order.delivered_at = DateTime.now()
+    order.save!
+    redirect_back(fallback_location: "/")
+  end
+
+  def cancel_order
+    order=Order.find(params[:order_id])
+    order.ordercancel_at = DateTime.now()
+    order.cancel_reason = params[:reason]
+    unless order.save
+      flash[:error]=order.errors.full_messages.join(",")
+    end
+    redirect_back(fallback_location:"/")
+  end
 end

@@ -1,0 +1,13 @@
+<div class="addMenu-container">
+  <p><%= form.label :item_name%></p>
+  <%= form.text_field :item_name, class: "addMenu-input-section", type: "text",autofocus: true, placeholder: "Item name", required: true %>
+
+  <p><%= form.label :description%></p>
+  <%= form.text_area :description, class: "addMenu-input-section", placeholder:"Description" %>
+
+  <p><%= form.label :price%></p>
+  <%= form.number_field :price, class: "addMenu-input-section" %>
+
+  <%= form.submit "Edit", class: "addMenu-Button" %>
+
+</div>

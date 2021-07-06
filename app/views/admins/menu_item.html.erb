@@ -1,0 +1,69 @@
+<% if flash[:error] %>
+  <p class="Flash-error">
+    <%= flash[:error] %>
+  </p>
+<%elsif flash[:info]%>
+  <p class="Flash-info">
+    <%= flash[:info] %>
+  </p>
+<% end %>
+<h1 style="color:rgb(0, 0, 0); font-size:25px; text-align:center"><%= @category.menu_name.capitalize() %><h1>
+<hr>
+<div class="mengrid-container" style="z-index:-1">
+    <div>
+      <a class="Addmenu-text" onclick="document.getElementById('addnew-item').style.display='block'" style="width:auto;"> + Add new item </a>
+    </div>
+    <% @items.sort.each do |item|%>
+      <div class="menus-text">
+        <p class="menuName"><%=item.item_name.capitalize()%></p>
+        <p>
+          <a class="changeMenu" onclick="document.getElementById('edit-item<%=item.id%>').style.display='block' " style="width:auto;"> Edit </a> |
+          <%=link_to "Delete",menu_item_path(item.id),method: :delete,class:"changeMenu delete" %></p>
+        <hr>
+        <p class="menuItemcount" style="color:#323232;">Price: ₹ <%=item.price%></p>
+        <p>
+          <% if item.active %>
+            <%=link_to "Active",activate_item_path(item.id,active: false),method: :patch,class:"activebutton"%>
+          <%else%>
+            <%=link_to "Inactive",activate_item_path(item.id,active: true),method: :patch,class:"activebutton inactive"%>
+          <%end%>
+        </p>
+        <p style="color: #8a8787"><%= item.description %></p>
+      </div>
+
+      <div id="edit-item<%=item.id%>" class="addMenu-modal">
+        <%= form_with(model: item, class: "menuview-modal-content menuview-animate") do |form| %>
+          <div class="cancel-imgcontainer">
+            <span onclick="document.getElementById('edit-item<%=item.id%>').style.display='none'" class="close" title="Close Modal">&times;</span>
+          </div>
+
+          <%= render partial: 'menu_items/admineditMenuItems',locals:{form: form}%>
+
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('edit-item<%=item.id%>').style.display='none'" class="cancelbtn">Cancel</button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+</div>
+
+
+<div id="addnew-item" class="addMenu-modal">
+  <%= render partial: "menu_items/adminAddItem",locals:{category_id: @category.id} %>
+</div>
+
+
+
+<script>
+  var modal = document.getElementById('addnew-menu1');
+
+
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+
+
+</script>

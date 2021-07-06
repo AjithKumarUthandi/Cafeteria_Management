@@ -1,0 +1,107 @@
+<% if flash[:error] %>
+  <p class="Flash-error">
+    <%= flash[:error] %>
+  </p>
+<%elsif flash[:info]%>
+  <p class="Flash-info">
+    <%= flash[:info] %>
+  </p>
+<% end %>
+<div class="accordion accordion-flush " style="padding-left:50px"id="accordionFlushExample">
+  <% Order.order("delivered_at DESC NULLS FIRST , ordercancel_at DESC NULLS FIRST").each do |order| %>
+    <div class="accordion-item orderAccordion-item" >
+      <h2 class="accordion-header" id="flush-heading<%=order.id%>" >
+        <button class="accordion-button collapsed orderAccordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=order.id%>" aria-expanded="false" aria-controls="flush-collapse<%=order.id%>">
+          <div class="flexDisplay">
+            <p class="orderId-text"> Order id: #<%= order.id%> </p>
+            <% if order.delivered_at %>
+              <div class="flexDisplay delivery_date-text">Delivered on: <p class="delivery_date"><%=order.delivered_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
+            <% elsif order.ordercancel_at%>
+              <div class="flexDisplay delivery_date-text">Canceled_at: <p class="cancel_date"><%=order.ordercancel_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
+            <%else%>
+              <p class="deliverd-status">Status: <p class="deliverd-status pendingStatus">Pending<p></p>
+            <% end %>
+          </div>
+          <div class="orderdetails-text">
+            <%address = Address.find(order.address_id)%>
+            <%= "#{address.door_no}, #{address.address}, #{address.city} : #{address.postal_code}" %>
+          </div>
+          <div class="orderdetails-text flexDisplay">
+             <p class="order_at "> Ordered_at: </p> <%= order.created_at.to_s(:long)%>
+          </div>
+          <%if order.ordercancel_at%>
+            <P class="orderCanceledReason-text"> <%= order.cancel_reason%></p>
+          <%end%>
+          <p style="color:green" class="orderdetails-text"> View details </p>
+        </button>
+        <% unless order.delivered_at || order.ordercancel_at %>
+          <div class="adminorderbutton">
+            <%= link_to  "complete", complete_order_path(order.id),method: :patch ,class:"orderComplete" %>
+            <button type="button" class="btn btn-primary orderCancel" data-bs-toggle="modal" data-bs-target="#orderCancelModal" data-bs-whatever="<%=order.id%>">Cancel</button>
+          </div>
+        <% end %>
+      </h2>
+      <div id="flush-collapse<%=order.id%>" class="accordion-collapse collapse" aria-labelledby="flush-heading<%=order.id%>" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+            <% items = order.order_items %>
+            <p class="orderitem-count"> Item: <%= items.count %> </p>
+            <hr>
+            <% total = 0%>
+            <% items.each do |item| %>
+              <div class="flexDisplay">
+                <p class="orderitem-name pb-3" > <%= item.menu_item_name.capitalize() %> * <%= item.menu_item_quantity %> </p>
+                <p class="orderitem-price"> ₹ <%= item.menu_item_price %> </p>
+              </div>
+              <% total += item.menu_item_price%>
+            <% end %>
+            <hr>
+            <div class="flexDisplay">
+              <p class="orderitem-count"> Pay via cash</p>
+              <p class="orderitem-bill"> Bill Total <p class="order-total"> ₹ <%= total %></p></p>
+            </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="modal fade" id="orderCancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Reason for cancel *</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%=form_with url: cancel_order_path,method: :patch do |form|%>
+          <div class="mb-3">
+             <%# <label for="recipient-name" class="col-form-label">Order_id:</label> %>
+              <%= form.text_field :order_id, class:"form-control text-form",id:"recipient-name",hidden:true%>
+          </div>
+          <div class="mb-3">
+            <p class="col-form-label">Reason:  maximum_character(50)</p>
+            <%= form.text_area :reason,class: "form-control", id: "message-text", required: true,maxlength:"50" %>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= form.submit "Save",class:"btn btn-primary"%>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  var exampleModal = document.getElementById('orderCancelModal')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+
+      var button = event.relatedTarget
+      var recipient = button.getAttribute('data-bs-whatever')
+      var modalTitle = exampleModal.querySelector('.modal-title')
+      var modalBodyInput = exampleModal.querySelector('.modal-body .text-form')
+      modalBodyInput.value = recipient
+  })
+</script>
