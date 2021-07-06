@@ -13,17 +13,49 @@
 
   <body>
      <% if @current_user && @current_user.role=="admin"%>
-      <div class="padding_top">
+      <div class="adminprofile-section fixed-top" >
+        <div class="details-section">
+          <h1 class="user-name"><%= @current_user.first_name + " " + @current_user.last_name%></h1>
+          <h5 class="user-email"><%= @current_user.email %></h5>
+          <h5 class="user-phone_number">+91-<%= @current_user.phone_number %></h5>
+        </div>
+        <div class="message-info">
+          <% if flash[:error] %>
+            <p class="Flash-error">
+              <%= flash[:error] %>
+            </p>
+          <%elsif flash[:info]%>
+            <p class="Flash-info">
+              <%= flash[:info] %>
+            </p>
+          <% end %>
+        </div>
+
+        <button class="btn btn-primary editprofile-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Profile</button>
+        <button type="button" class="btn btn-primary deleteprofile-button" data-bs-toggle="modal" data-bs-target="#change_password" >Password</button>
+      </div>
+
+      <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="change_passwordLabel" aria-hidden="true">
+        <%= render partial: "users/password_authendicate" %>
+      </div>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <%= render partial: "users/edit", locals: {
+          user: @current_user
+        }%>
+      </div>
+
+
+      <div class="padding_top" style="position: fixed">
         <div id="mySidenav" class="sidenav">
           <%= link_to "Menus",admin_menu_path,class:"hoverlink menu"%>
           <%= link_to "Order",admin_order_path,class:"hoverlink order"%>
-          <%= link_to "Profile","#",class:"hoverlink profile"%>
           <%= link_to "Users","#",class:"hoverlink user"%>
           <%= link_to "Log_out",destroy_session_path, method: "delete",class:"hoverlink log_out"%>
         </div>
       </div>
     <% elsif (request.path!="/edit")%>
-        <nav class="navbar fixed-top  navbar-light bg-light">
+        <nav class="navbar fixed-top  navbar-light bg-light " >
           <%= link_to "Trend", "/", class: "navbar-brand title-style"%>
           <% if @current_user %>
             <div class="dropdown position-section">

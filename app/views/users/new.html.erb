@@ -9,23 +9,23 @@
     <%= form_with url: users_path do |form| %>
       <div class="inputContainer">
         <p class="log-inLabel ariel_family">First name * </p>
-        <%= form.text_field :first_name, class: "input-section", autofocus: true, placeholder: "First name" %>
+        <%= form.text_field :first_name, class: "input-section", autofocus: true, placeholder: "First name",required:true %>
       </div>
       <div class="inputContainer">
         <p class="log-inLabel ariel_family">Last name</p>
-        <%= form.text_field :last_name, class: "input-section",placeholder: "Last name" %>
+        <%= form.text_field :last_name, class: "input-section",placeholder: "Last name"%>
       </div>
       <div class="inputContainer">
         <p class="log-inLabel ariel_family">Email *</p>
-        <%= form.email_field :email, class: "input-section", placeholder: "xxx@email.com" %>
+        <%= form.email_field :email, class: "input-section", placeholder: "xxx@email.com",required:true %>
       </div>
       <div class="inputContainer">
         <p class="log-inLabel ariel_family">Phone number *</p>
-        <%= form.number_field :phone_number, class: "input-section", placeholder: "xxx-xxx-xxxx"%>
+        <%= form.number_field :phone_number, class: "input-section", placeholder: "xxx-xxx-xxxx",required:true%>
       </div>
       <div class="inputContainer">
         <p class="log-inLabel ariel_family">Password *</p>
-        <%= form.password_field :password, class: "input-section", placeholder: "must be 8 to 16 letters" %>
+        <%= form.password_field :password, class: "input-section", placeholder: "must be 8 to 16 letters", pattern:"[A-Za-z0-9_]{8,16}", title:"Eight or more characters",required:true %>
       </div>
       <div class="inputContainer">
         <%= form.submit "Sign-up!", class: "loginButton" %>

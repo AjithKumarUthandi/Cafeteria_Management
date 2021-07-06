@@ -22,3 +22,8 @@
 .padding_top{
   margin-top: 60px;
 }
+
+.message-info{
+  position: relative;
+  left: 20%;
+}

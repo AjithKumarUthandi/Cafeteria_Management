@@ -1,16 +1,18 @@
-<% if flash[:error] %>
-  <p class="Flash-error">
-    <%= flash[:error] %>
-  </p>
-<%elsif flash[:info]%>
-  <p class="Flash-info">
-    <%= flash[:info] %>
-  </p>
-<% end %>
-<div class="accordion accordion-flush " style="padding-left:50px"id="accordionFlushExample">
+
+<div class="accordion accordion-flush" style="margin-left:170px;margin-top: 100px;" id="accordionFlushExample">
+  <br><br><br><br><br><br><br>
+  <% if flash[:error] %>
+    <p class="Flash-error">
+      <%= flash[:error] %>
+    </p>
+  <%elsif flash[:info]%>
+    <p class="Flash-info">
+      <%= flash[:info] %>
+    </p>
+  <% end %>
   <% Order.order("delivered_at DESC NULLS FIRST , ordercancel_at DESC NULLS FIRST").each do |order| %>
-    <div class="accordion-item orderAccordion-item" >
-      <h2 class="accordion-header" id="flush-heading<%=order.id%>" >
+    <div class="accordion-item orderAccordion-item">
+      <h2 class="accordion-header" id="flush-heading<%=order.id%>">
         <button class="accordion-button collapsed orderAccordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=order.id%>" aria-expanded="false" aria-controls="flush-collapse<%=order.id%>">
           <div class="flexDisplay">
             <p class="orderId-text"> Order id: #<%= order.id%> </p>
@@ -63,35 +65,35 @@
       </div>
     </div>
   <% end %>
-</div>
 
-<div class="modal fade" id="orderCancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Reason for cancel *</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%=form_with url: cancel_order_path,method: :patch do |form|%>
-          <div class="mb-3">
-             <%# <label for="recipient-name" class="col-form-label">Order_id:</label> %>
-              <%= form.text_field :order_id, class:"form-control text-form",id:"recipient-name",hidden:true%>
-          </div>
-          <div class="mb-3">
-            <p class="col-form-label">Reason:  maximum_character(50)</p>
-            <%= form.text_area :reason,class: "form-control", id: "message-text", required: true,maxlength:"50" %>
-          </div>
+  <div class="modal fade" id="orderCancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Reason for cancel *</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%=form_with url: cancel_order_path,method: :patch do |form|%>
+            <div class="mb-3">
+                <%= form.text_field :order_id, class:"form-control text-form",id:"recipient-name",hidden:true%>
+            </div>
+            <div class="mb-3">
+              <p class="col-form-label">Reason:  maximum_character(50)</p>
+              <%= form.text_area :reason,class: "form-control", id: "message-text", required: true,maxlength:"50" %>
+            </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= form.submit "Save",class:"btn btn-primary"%>
-          </div>
-        <%end%>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= form.submit "Save",class:"btn btn-primary"%>
+            </div>
+          <%end%>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <script>
 

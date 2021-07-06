@@ -11,7 +11,7 @@
       <%= form.number_field :price, class: "addMenu-input-section", required:true%>
 
       <p>Description</p>
-      <%= form.text_area :description, class: "addMenu-input-section" %>
+      <%= form.text_area :description, class: "addMenu-input-section", maxlength:"50" %>
 
       <p class="addMenu-checkbox-text">active <%= form.check_box :active,value: true,class: "addmenu-checkbox" %></p>
 

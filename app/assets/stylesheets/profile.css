@@ -9,7 +9,13 @@ body{
   padding-top: 30px;
   padding-bottom: 30px;
 }
-
+.adminprofile-section{
+  display: flex;
+  background-color: rgb(31, 29, 66);
+  padding: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
 .editprofile-section {
   display: flex;
   padding: 10px;

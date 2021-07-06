@@ -1,4 +1,5 @@
 class MenuCategoriesController < ApplicationController
+
   def index
     render "index"
   end
@@ -16,10 +17,10 @@ class MenuCategoriesController < ApplicationController
       active: active
     )
 
-    if(new_menu_catagory.save)
+    if(new_menu_catagory.valid? and new_menu_catagory.save)
       redirect_to "/"
     else
-      flash[:error] = new_user.errors.full_messages.join(", ")
+      flash[:error] = new_menu_catagory.errors.full_messages.join(", ")
       redirect_to "/"
     end
   end
@@ -29,24 +30,32 @@ class MenuCategoriesController < ApplicationController
     active = params[:active]
     menu = MenuCategory.find(id)
     menu.active = active
-    menu.save!
+    menu.save!(validate: false)
     redirect_to "/"
   end
 
   def update
-    category_id = params[:id]
-    if( MenuCategory.find(category_id).update(category_params) )
-      redirect_to "?"
+    category = MenuCategory.find(params[:id])
+    category_parameters = category_params
+    category.menu_name = category_parameters["menu_name"]
+    category.available_time_begin = category_parameters["available_time_begin"]
+    category.available_time_end = category_parameters["available_time_end"]
+    if( category.valid? && category.save )
+      redirect_to "/"
     else
-      flash[:error] = category_id.errors.full_messages.join(", ")
+      flash[:error] = "Item name already exist"
       redirect_to "/"
     end
   end
 
   def destroy
     menu = MenuCategory.find(params[:id])
-    menu.archive_at = Time.zone.now()
-    menu.save!
+    menu.archive_at = Time.now()
+    menu.save!(validate: false)
+    MenuItem.getall_items(menu.id).each do |item|
+      item.archive_at = Time.now()
+      item.save!(validate: false)
+    end
     redirect_to "/"
   end
 
@@ -55,3 +64,15 @@ class MenuCategoriesController < ApplicationController
       params.require(:menu_category).permit(:menu_name, :available_time_begin, :available_time_end)
     end
 end
+
+# def update
+#   category_id = params[:id]
+#   category_parameters = category_params
+#   isvalidName = MenuCategory.isnamevalid(category_parameters["menu_name"])
+#   if( isvalidName && MenuCategory.find(category_id).update(category_params) )
+#     redirect_to "/"
+#   else
+#     flash[:error] = "Item name already exist"
+#     redirect_to "/"
+#   end
+# end
