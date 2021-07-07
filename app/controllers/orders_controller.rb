@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  skip_before_action :ensure_customer_role,only: [:create]
+  skip_before_action :ensure_admin_role,except: [:create]
   def create
     new_order = Order.new(
       user_id: @current_user.id,

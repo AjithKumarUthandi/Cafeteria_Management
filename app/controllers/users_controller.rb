@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in,only: [:new, :create]
+  skip_before_action :ensure_admin_role,except: [:create, :profile, :destroy]
+  skip_before_action :ensure_customer_role
+
 
   def new
     render "users/new"
@@ -54,11 +57,11 @@ class UsersController < ApplicationController
         session[:current_user_id] = nil
         @current_user = nil
       end
-      user.destroy
-      redirect_to "/"
+      user.archive_at = Time.now()
+      redirect_to "/signin"
     else
       flash[:error] = "Password is wrong"
-      redirect_to "/profile"
+      redirect_back(fallback_location: "/")
     end
   end
 

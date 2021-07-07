@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  skip_before_action :ensure_customer_role
   def new
   end
 

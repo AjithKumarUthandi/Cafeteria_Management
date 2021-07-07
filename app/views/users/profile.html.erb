@@ -10,86 +10,85 @@
       });
   });
 </script>
-<div>
-<div class="padding_top">
-  <div class="profile-section fixed-top" >
-    <div class="details-section">
-      <h1 class="user-name"><%= @current_user.first_name + " " + @current_user.last_name%></h1>
-      <h5 class="user-email"><%= @current_user.email %></h5>
-      <h5 class="user-phone_number">+91-<%= @current_user.phone_number %></h5>
+<div >
+  <div>
+    <div class="padding_top" >
+      <div class="profile-section fixed-top" style="z-index:-1;">
+        <div class="details-section">
+          <h1 class="user-name"><%= @current_user.first_name + " " + @current_user.last_name%></h1>
+          <h5 class="user-email"><%= @current_user.email %></h5>
+          <h5 class="user-phone_number">+91-<%= @current_user.phone_number %></h5>
+        </div>
+
+        <button class="btn btn-primary editprofile-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Profile</button>
+        <button type="button" class="btn btn-primary deleteprofile-button" data-bs-toggle="modal" data-bs-target="#delete_account" >Destroy</button>
+      </div>
+
+
+      <div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="delete_accountLabel" aria-hidden="true">
+        <%= render partial: "password_authendicate", locals: {
+          path: user_path(@current_user.id),
+          url_method: :delete
+          } %>
+      </div>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <%= render partial: "edit", locals: {
+          user: @current_user
+        }%>
+      </div>
     </div>
 
-    <button class="btn btn-primary editprofile-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Profile</button>
-    <button type="button" class="btn btn-primary deleteprofile-button" data-bs-toggle="modal" data-bs-target="#delete_account" >Destroy</button>
-  </div>
+    <div class="profile-sidebar">
+      <div class="btn-group radio-sidebar" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio1" value="address" autocomplete="off" checked>
+        <label class="btn btn-outline-primary profile-radiolabel" for="btnradio1">Address</label>
 
+        <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio2" value="order" autocomplete="off"  >
+        <label class="btn btn-outline-primary profile-radiolabel orderlabel" for="btnradio2">Order </label>
 
-  <div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="delete_accountLabel" aria-hidden="true">
-    <%= render partial: "password_authendicate", locals: {
-      path: user_path(@current_user.id),
-      url_method: :delete
-      } %>
-  </div>
-
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <%= render partial: "edit", locals: {
-      user: @current_user
-    }%>
-  </div>
-</div>
-
-<div class="profile-sidebar ">
-  <div class="flexDisplay ">
-    <div class="btn-group radio-sidebar" role="group" aria-label="Basic radio toggle button group">
-
-      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio1" value="address" autocomplete="off" checked>
-      <label class="btn btn-outline-primary profile-radiolabel" for="btnradio1">Address</label>
-
-      <input type="radio" class="btn-check profile-radiobutton" name="btnradio" id="btnradio2" value="order" autocomplete="off"  >
-      <label class="btn btn-outline-primary profile-radiolabel orderlabel" for="btnradio2">Order </label>
-
-      <input type="radio" class="btn-check profile-radiobutton " name="btnradio" id="btnradio3" value="password" autocomplete="off" >
-      <label class="btn btn-outline-primary profile-radiolabel passwordlabel" for="btnradio3">Password</label>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="profile-body">
-  <% if flash[:error] %>
-    <p class="Flash-error">
-      <%= flash[:error] %>
-    </p>
-  <% elsif flash[:info]%>
-    <p class="Flash-info">
-      <%= flash[:info] %>
-    </p>
-  <% end %>
-  <div class="address box" >
-    <%= render partial: "addresses/index"%>
-  </div>
-  <div class="order box">
-    <%= render partial: "orders/index" %>
-  </div>
-  <div class="password box" style="position: fixed;">
-    <%= form_with url: change_password_path, method: :delete do |form| %>
-      <div class="passwordinputContainer">
-        <p class="log-inLabel ariel_family">Old-password</p>
-        <%= form.password_field :old_password, class: "passwordinput-section", autofocus: true, placeholder: "Old-password" %>
+        <input type="radio" class="btn-check profile-radiobutton " name="btnradio" id="btnradio3" value="password" autocomplete="off" >
+        <label class="btn btn-outline-primary profile-radiolabel passwordlabel" for="btnradio3">Password</label>
       </div>
-      <div class="passwordinputContainer">
-        <p class="log-inLabel ariel_family">New-password</p>
-        <%= form.password_field :new_password, class: "passwordinput-section",placeholder: "New-password"%>
-      </div>
-      <br>
-      <br>
-      <div class="Form-section">
-        <%= form.submit "Change password", class: "changeButton" %>
-      </div>
-      <br>
-      <br>
-      <hr>
+  </div>
+
+
+
+  <div class="profile-body border-shadow">
+    <% if flash[:error] %>
+      <p class="Flash-error">
+        <%= flash[:error] %>
+      </p>
+    <% elsif flash[:info]%>
+      <p class="Flash-info">
+        <%= flash[:info] %>
+      </p>
     <% end %>
+    <div class="address box" >
+      <%= render partial: "addresses/index"%>
+    </div>
+    <div class="order box">
+      <%= render partial: "orders/index" %>
+    </div>
+    <div class="password box" style="position: fixed;">
+      <%= form_with url: change_password_path, method: :delete do |form| %>
+        <div class="passwordinputContainer">
+          <p class="log-inLabel ariel_family">Old-password</p>
+          <%= form.password_field :old_password, class: "passwordinput-section", autofocus: true, placeholder: "Old-password" %>
+        </div>
+        <div class="passwordinputContainer">
+          <p class="log-inLabel ariel_family">New-password</p>
+          <%= form.password_field :new_password, class: "passwordinput-section",placeholder: "New-password"%>
+        </div>
+        <br>
+        <br>
+        <div class="Form-section">
+          <%= form.submit "Change password", class: "changeButton" %>
+        </div>
+        <br>
+        <br>
+        <hr>
+      <% end %>
+    </div>
   </div>
 </div>

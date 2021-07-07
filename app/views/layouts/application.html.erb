@@ -50,12 +50,11 @@
         <div id="mySidenav" class="sidenav">
           <%= link_to "Menus",admin_menu_path,class:"hoverlink menu"%>
           <%= link_to "Order",admin_order_path,class:"hoverlink order"%>
-          <%= link_to "Users","#",class:"hoverlink user"%>
           <%= link_to "Log_out",destroy_session_path, method: "delete",class:"hoverlink log_out"%>
         </div>
       </div>
     <% elsif (request.path!="/edit")%>
-        <nav class="navbar fixed-top  navbar-light bg-light " >
+        <nav class="navbar fixed-top  navbar-dark bg-dark">
           <%= link_to "Trend", "/", class: "navbar-brand title-style"%>
           <% if @current_user %>
             <div class="dropdown position-section">

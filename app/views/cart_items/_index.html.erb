@@ -6,7 +6,7 @@
         <p class="emptyCartText"> Empty Cart </p>
       </div>
     <% else %>
-      <div class="cart-items">
+      <div class="cart-items border-shadow">
         <div class="flexDisplay">
           <p class="cartname-text">Cart</p>
           <%= link_to "clear", cart_deleteitems_path, method: :delete, type:"button", class:"clearCart"%>
@@ -17,20 +17,22 @@
           <div class="row">
             <% total = 0 %>
             <% @current_user.cart_items.all.each do |item|%>
-              <div class="col">
-                <%= item.menu_item_name.capitalize() %>
-              </div>
-              <div class="col cart-secondCol">
-                <% price = MenuItem.find(item.menu_item_id).price * item.menu_item_quantity%>
-                ₹ <%= price %>
-                <% total += price%>
+              <div>
+                <div class="col cart-itemsName">
+                  <%= item.menu_item_name.capitalize() %>
+                </div>
+                <div class="col cart-secondCol">
+                  <% price = MenuItem.find(item.menu_item_id).price * item.menu_item_quantity%>
+                  ₹ <%= price %>
+                  <% total += price%>
+                </div>
               </div>
             <% end %>
           </div>
         </div>
         <hr class="cart-hr">
+        <p class="subtotal-text">Subtotal:</p> <p class="subtotal-price"> ₹ <%= total %> </p>
         <div class="subtotal">
-          <div class="subtotal-text">Subtotal: <p class="subtotal-price"> ₹ <%= total %> </p> </div>
           <br><br>
           <%= form_with url: orders_path do |form| %>
               <p class="selctTitle-text">Address:</p>
@@ -41,7 +43,7 @@
                 <%= form.submit "Place Order", class: "cart-button", disabled: true  %>
               <% else %>
                 <%= form.select(:address,
-                  options_for_select(@current_user.addresses.collect{ |add| ["#{add.door_no}, #{add.address}, #{add.city} : #{add.postal_code}", add.id] }, class:"optionAddress-section"),
+                  options_for_select(@current_user.addresses.collect{ |add| ["#{add.door_no}, #{add.address.capitalize()}, #{add.city.capitalize()} : #{add.postal_code}", add.id] }, class:"optionAddress-section"),
                   {}, { :class => 'selectAddress-section' })
                 %>
                 <p class="selctTitle-text">Payment:</p>

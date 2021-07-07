@@ -27,3 +27,7 @@
   position: relative;
   left: 20%;
 }
+
+.border-shadow{
+  box-shadow: 5px 10px 8px 10px #888888;
+}

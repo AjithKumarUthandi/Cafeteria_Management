@@ -1,4 +1,5 @@
 class OrderItemsController < ApplicationController
+  skip_before_action :ensure_customer_role
   def create
     new_orders = []
     @current_user.cart_items.each do |item|

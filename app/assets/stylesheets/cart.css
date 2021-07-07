@@ -4,11 +4,12 @@
   height: 80%;
   width: 350px;
   position: fixed;
-  bottom: 70px;
+  top: 100px;
   right: 20px;
   overflow-x: hidden;
   padding-top: 20px;
   background-color: rgba(248, 247, 247, 0.616);
+  box-shadow: 5px 10px 8px 10px #888888;
 }
 
 .emptyCartText{
@@ -26,6 +27,7 @@
   font-family: Lora, serif;
   letter-spacing: 3px;
   padding-left: 19px;
+  padding-right: 19px;
   height: 80%;
   width: 350px;
   position: fixed;
@@ -41,10 +43,11 @@
   font-size: 36px;
   font-weight: 800;
   color: rgb(5, 5, 5);
+
 }
 
 .cart-secondCol{
-  padding-left:150px;
+  float: right;
 }
 
 .cartitem-text{
@@ -68,10 +71,12 @@
 .subtotal-text {
   display: flex;
   font-weight: bolder;
+  float: left;
 }
 
 .subtotal-price{
-  margin-left: 145px;
+  float: right;
+  margin-right: 13px;
 }
 
 .cart-button{
@@ -87,7 +92,8 @@
   margin-top: 10px;
   cursor: pointer;
   -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;;
+  transition-duration: 0.4s;
+  border-radius: 10px;
 }
 
 .cart-button:hover {
@@ -156,4 +162,8 @@
   padding: 13px;
   font-size: x-large;
   color: ghostwhite;
+}
+
+.cart-itemsName{
+  float: left;
 }

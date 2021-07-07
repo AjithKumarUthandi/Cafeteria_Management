@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  skip_before_action :ensure_user_logged_in
+  skip_before_action :ensure_user_logged_in, :ensure_customer_role
 
   def index
     current_user
@@ -12,12 +12,10 @@ class CartItemsController < ApplicationController
       menu_item_name: item.item_name,
       user_id: current_user.id
     )
-    if(new_cart.save)
-      redirect_to "/"
-    else
+    unless(new_cart.save)
       flash[:error] = new_user.errors.full_messages.join(", ")
-      redirect_to "/"
     end
+    redirect_back(fallback_location: "/")
   end
 
   def update
@@ -32,16 +30,16 @@ class CartItemsController < ApplicationController
         item.destroy
       end
     end
-    redirect_to "/"
+    redirect_back(fallback_location: "/")
   end
 
   def destroy_all
     current_user.cart_items.destroy_all
-    redirect_to "/"
+    redirect_back(fallback_location: "/")
   end
 
   def deleteordered_all
     current_user.cart_items.destroy_all
-    redirect_to "/"
+    redirect_back(fallback_location: "/")
   end
 end

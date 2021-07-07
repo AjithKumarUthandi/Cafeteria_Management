@@ -1,9 +1,5 @@
 class MenuCategoriesController < ApplicationController
-
-  def index
-    render "index"
-  end
-
+  skip_before_action :ensure_admin_role
   def create
     menu_name = params[:menu_name]
     available_time_begin = params[:available_time_begin]
@@ -64,15 +60,3 @@ class MenuCategoriesController < ApplicationController
       params.require(:menu_category).permit(:menu_name, :available_time_begin, :available_time_end)
     end
 end
-
-# def update
-#   category_id = params[:id]
-#   category_parameters = category_params
-#   isvalidName = MenuCategory.isnamevalid(category_parameters["menu_name"])
-#   if( isvalidName && MenuCategory.find(category_id).update(category_params) )
-#     redirect_to "/"
-#   else
-#     flash[:error] = "Item name already exist"
-#     redirect_to "/"
-#   end
-# end

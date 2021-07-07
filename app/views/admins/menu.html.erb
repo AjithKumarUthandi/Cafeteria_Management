@@ -1,11 +1,10 @@
 
-<div class="mengrid-container" style="z-index:-1">
-    <div>
-      <a class="Addmenu-text" onclick="document.getElementById('addnew-menu').style.display='block'" style="width:auto;"> + Add new category </a>
-
+<div class="mengrid-container border-shadow" style="z-index:-1">
+    <div class="border-shadow">
+      <a class="Addmenu-text " onclick="document.getElementById('addnew-menu').style.display='block'" style="width:auto;"> + Add new category </a>
     </div>
     <% MenuCategory.get_menuCategories.sort.each do |menu|%>
-      <div class="menus-text">
+      <div class="menus-text border-shadow">
         <p class="menuName"><%=menu.menu_name.capitalize()%></p>
 
         <p>

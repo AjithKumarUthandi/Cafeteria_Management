@@ -25,12 +25,8 @@
   background-color: #2196F3;
 }
 
-.user {
-  top: 140px;
-  background-color: #555
-}
 
 .log_out {
-  top: 200px;
+  top: 140px;
   background-color: rgb(3, 0, 0)
 }

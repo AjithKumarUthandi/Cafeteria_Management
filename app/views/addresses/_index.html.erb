@@ -5,7 +5,7 @@
 
   <% @current_user.addresses.each do |address| %>
     <div class="addressGrid-item addressList">
-      <%="#{address.door_no}, #{address.address}, #{address.city} : #{address.postal_code}"%>
+      <%="#{address.door_no}, #{address.address.capitalize()}, #{address.city.capitalize()} : #{address.postal_code}"%>
     </div>
   <%end%>
 

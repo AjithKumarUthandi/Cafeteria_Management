@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  skip_before_action :ensure_admin_role
   def menu
   end
 

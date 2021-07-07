@@ -1,9 +1,21 @@
 class ApplicationController < ActionController::Base
-  before_action :ensure_user_logged_in
+  before_action :ensure_user_logged_in, :ensure_admin_role, :ensure_customer_role
 
   def ensure_user_logged_in
     unless current_user
       redirect_to "/"
+    end
+  end
+
+  def ensure_admin_role
+    if current_user.role == "admin"
+      error
+    end
+  end
+
+  def ensure_customer_role
+    if current_user.role == "customer"
+      error
     end
   end
 
@@ -22,5 +34,9 @@ class ApplicationController < ActionController::Base
     else
       nil
     end
+  end
+
+  def error
+    render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
   end
 end

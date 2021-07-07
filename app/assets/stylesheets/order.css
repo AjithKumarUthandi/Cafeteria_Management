@@ -51,27 +51,19 @@
 }
 
 .orderitem-price {
-  position: absolute;
-  top: auto;
-  right: 560px;
+  float: right;
 }
 
 .orderitem-count {
   letter-spacing: normal;
   color: rgb(174, 174, 175);
+  float: left;
 }
 
 .orderitem-bill{
   letter-spacing: normal;
-  position: absolute;
-  margin-left: 600px;
   font-weight: bold;
-}
-
-.order-total {
-  position: absolute;
-  margin-left: 700px;
-  font-weight: bold;
+  text-align: right;
 }
 
 .adminorderbutton{

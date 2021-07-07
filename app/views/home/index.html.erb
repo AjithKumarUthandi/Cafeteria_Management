@@ -1,28 +1,30 @@
 <div class="padding_top">
-  <nav id="navbar-example2" class="navbar-light bg-light px-3 menuCategory-list">
-    <ul class="nav-pills sidenav">
-      <% MenuCategory.getactive_menuCategories.each do |menu| %>
-        <li class="nav-item">
-          <%= link_to menu.menu_name.capitalize(), "##{menu.id}", class: "nav-category"%>
-        </li>
-      <% end %>
-    </ul>
-  </nav>
+  <div class="menuCategory-list">
+    <nav id="navbar-example2" class="navbar-light bg-light px-3">
+      <ul class="nav-pills sidenav ">
+        <% MenuCategory.getactive_menuCategories.each do |menu| %>
+          <li class="nav-item">
+            <%= link_to menu.menu_name.capitalize(), "##{menu.id}", class: "nav-category"%>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</div>
 
-  <div  class="scrollspy-example scroll-items" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0">
-
-    <% if flash[:error] %>
-      <p class="Flash-error">
-        <%= flash[:error] %>
-      </p>
-    <%elsif flash[:info]%>
-      <p class="Flash-info">
-        <%= flash[:info] %>
-      </p>
-    <% end %>
-
-    <% MenuCategory.get_menuCategories.each do |menu| %>
-      <h4 id = <%= menu.id %> class="category-name"><br><%=menu.menu_name.capitalize()%></h4>
+<div  class="scrollspy-example scroll-items" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0">
+  <% if flash[:error] %>
+    <p class="Flash-error">
+      <%= flash[:error] %>
+    </p>
+  <%elsif flash[:info]%>
+    <p class="Flash-info">
+      <%= flash[:info] %>
+    </p>
+  <% end %>
+  <div class="menu-item-container border-shadow">
+    <% MenuCategory.getactive_menuCategories.each do |menu| %>
+      <h4 id = "<%= menu.id %>" class="category-name"><br><%=menu.menu_name.capitalize()%></h4>
       <% MenuItem.get_items(menu.id).each do |item| %>
         <%= render partial: "menu_items/menuItems-section", locals: {
             item: item
@@ -34,8 +36,7 @@
       <hr class="lineBetweenCategories">
     <%end%>
   </div>
-
-  <div class="padding_top">
-    <%= render partial: "cart_items/index"%>
-  </div>
+</div>
+<div class="padding_top">
+  <%= render partial: "cart_items/index"%>
 </div>

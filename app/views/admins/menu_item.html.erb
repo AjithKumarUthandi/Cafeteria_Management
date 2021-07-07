@@ -1,21 +1,12 @@
-<div style="margin-top: 170px;">
+<div style="margin-top: 180px;">
   <h1 style="color:rgb(0, 0, 0); font-size:25px; text-align:center"><%= @category.menu_name.capitalize() %><h1>
   <hr>
-    <% if flash[:error] %>
-      <p class="Flash-error">
-        <%= flash[:error] %>
-      </p>
-    <%elsif flash[:info]%>
-      <p class="Flash-info">
-        <%= flash[:info] %>
-      </p>
-    <% end %>
-  <div class="mengrid-container" style="margin-top:0px;">
-      <div>
+  <div class="mengrid-container border-shadow" style="margin-top:0px;">
+      <div class="border-shadow">
         <a class="Addmenu-text" onclick="document.getElementById('addnew-item').style.display='block'" style="width:auto;"> + Add new item </a>
       </div>
       <% @items.sort.each do |item|%>
-        <div class="menus-text">
+        <div class="menus-text border-shadow">
           <p class="menuName"><%=item.item_name.capitalize()%></p>
           <p>
             <a class="changeMenu" onclick="document.getElementById('edit-item<%=item.id%>').style.display='block' " style="width:auto;"> Edit </a> |

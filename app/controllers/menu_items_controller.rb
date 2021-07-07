@@ -1,6 +1,5 @@
 class MenuItemsController < ApplicationController
-  skip_before_action :ensure_user_logged_in
-
+  skip_before_action :ensure_user_logged_in, :ensure_admin_role
   def index
     current_user
     menu_category_id = params[:menu_id]

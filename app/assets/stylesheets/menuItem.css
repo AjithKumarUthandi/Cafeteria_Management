@@ -1,3 +1,4 @@
+
 .MenuItemSection{
   display: flex;
   padding: 10px;
@@ -18,17 +19,19 @@
 }
 
 .itemButton-section {
-  position: absolute;
+  padding: 8px 8px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
   background-color: #FFFFFF ;
   border: 1px solid black;
   font-size: 18px;
   color:#04AA6D;
-  padding: 5px;
-  right: 400px;
   text-align: center;
-  text-decoration: none;
   cursor: pointer;
+  float: right;
 }
+
 
 
 .itemDetail-section{
@@ -43,4 +46,11 @@
 
 .description {
   color:rgb(104, 102, 102);
+}
+
+.menu-item-container{
+  padding: 20px 110px;
+  background-color: ghostwhite;
+  border: 1px soli;
+  border-radius: 4px;
 }

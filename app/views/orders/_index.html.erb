@@ -1,4 +1,4 @@
-<div class="accordion accordion-flush" id="accordionFlushExample">
+<div class="accordion accordion-flush" id="accordionFlushExample" style="background-color: aliceblue;">
   <% @current_user.orders.order("delivered_at DESC NULLS FIRST , ordercancel_at DESC NULLS FIRST").each do |order| %>
     <div class="accordion-item orderAccordion-item">
       <h2 class="accordion-header" id="flush-heading<%=order.id%>">
@@ -33,16 +33,17 @@
             <hr>
             <% total = 0%>
             <% items.each do |item| %>
-              <div class="flexDisplay">
-                <p class="orderitem-name pb-3" > <%= item.menu_item_name.capitalize() %> * <%= item.menu_item_quantity %> </p>
-                <p class="orderitem-price"> ₹ <%= item.menu_item_price %> </p>
+              <div>
+                <div class="orderitem-name pb-3" > <%= item.menu_item_name.capitalize() %> * <%= item.menu_item_quantity %>
+                  <div class="orderitem-price"> ₹ <%= item.menu_item_price %> </div>
+                </div>
               </div>
               <% total += item.menu_item_price%>
             <% end %>
             <hr>
-            <div class="flexDisplay">
+            <div>
               <p class="orderitem-count"> Pay via cash</p>
-              <p class="orderitem-bill"> Bill Total <p class="order-total"> ₹ <%= total %></p></p>
+              <p class="orderitem-bill"> Bill Total ₹ <%= total %></p>
             </div>
         </div>
       </div>

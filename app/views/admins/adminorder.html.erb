@@ -1,5 +1,5 @@
 
-<div class="accordion accordion-flush" style="margin-left:170px;margin-top: 100px;" id="accordionFlushExample">
+<div class="accordion accordion-flush border-shadow adminorder-view" id="accordionFlushExample">
   <br><br><br><br><br><br><br>
   <% if flash[:error] %>
     <p class="Flash-error">
@@ -50,16 +50,16 @@
             <hr>
             <% total = 0%>
             <% items.each do |item| %>
-              <div class="flexDisplay">
+              <div>
                 <p class="orderitem-name pb-3" > <%= item.menu_item_name.capitalize() %> * <%= item.menu_item_quantity %> </p>
                 <p class="orderitem-price"> ₹ <%= item.menu_item_price %> </p>
               </div>
               <% total += item.menu_item_price%>
             <% end %>
             <hr>
-            <div class="flexDisplay">
+            <div>
               <p class="orderitem-count"> Pay via cash</p>
-              <p class="orderitem-bill"> Bill Total <p class="order-total"> ₹ <%= total %></p></p>
+              <p class="orderitem-bill"> Bill Total ₹ <%= total %></p>
             </div>
         </div>
       </div>
