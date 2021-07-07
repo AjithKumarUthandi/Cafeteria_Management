@@ -62,7 +62,7 @@ body{
   left: 0px;
   overflow-x: hidden;
   padding-top: 20px;
-  background-color: rgb(253, 238, 190,0.65);
+  background-color: rgba(253, 238, 190,0.65);
 }
 
 .radio-sidebar {
