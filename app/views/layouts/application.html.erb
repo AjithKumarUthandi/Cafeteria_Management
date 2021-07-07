@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Food</title>
+    <title>South India</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -55,7 +55,7 @@
       </div>
     <% elsif (request.path!="/edit")%>
         <nav class="navbar fixed-top  navbar-dark bg-dark">
-          <%= link_to "Food", "/", class: "navbar-brand title-style",style:"color:#9dff00"%>
+          <%= link_to "SI", "/", class: "navbar-brand title-style"%>
           <% if @current_user %>
             <div class="dropdown position-section">
               <button class="dropbtn"><%= @current_user.first_name %></button>
