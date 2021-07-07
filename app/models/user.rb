@@ -3,12 +3,6 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :phone_number, {presence: true, length: { is: 10 },numericality: true}
 
-  # PASSWORD_REQUIREMENTS =/\A
-  #   (?=.{8,})
-  # /x
-
-  # validates :password, {length: {minimum:8, maximum:16}, format:PASSWORD_REQUIREMENTS, acceptance: { message: 'password must be conatain atleat one character from all symbol' } }, on: :create
-
   has_many :addresses
   has_many :cart_items
   has_many :orders

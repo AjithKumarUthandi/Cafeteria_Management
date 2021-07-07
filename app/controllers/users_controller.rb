@@ -35,10 +35,10 @@ class UsersController < ApplicationController
   def update
     user = @current_user
     user_parameters = user_params
-    if( User.valid_email(user_parameters["email"]) && @current_user.update( user_params) )
+    if( !User.valid_email(user_parameters["email"]) && @current_user.update( user_params) )
       flash[:info]="Succeflly update"
     else
-      flash[:error] = @current_user.errors.full_messages.join(", ")
+      flash[:error] = "Invalid Input"
       if(@current_user.email!=user_parameters["email"] && flash[:error] =="")
         flash[:error]="email name aldready exist"
       end
