@@ -1,5 +1,13 @@
 # [SouthIndia](https://southindia.herokuapp.com/)-online food shoping
 
+#admin
+  email: southindia@email.com
+  password: southindia
+
+#customer
+  email:customer@email.com
+  password:customer
+
 In my application there are two users
   -Customer
   -Admin(Owner)
