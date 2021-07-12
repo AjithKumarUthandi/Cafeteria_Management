@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   get "/adminmenus" => "admins#menu", as: :admin_menu
   get "/adminmenuitems" => "admins#menu_item", as: :admin_menu_items
   get "/adminorders" => "admins#adminorder", as: :admin_order
+  get "/show_all_users" => "admins#show_all_users", as: :show_all_users
 end

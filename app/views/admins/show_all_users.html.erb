@@ -1,0 +1,29 @@
+<div class="show_users">
+  <% user_role = @users.first.role%>
+  <div class="role_field">
+    <%= link_to "Admin",show_all_users_path(role: "admin"),class: (user_role=="admin")? "checked_radio" : "users_radio_tag", name:"role"%>
+    <%= link_to "Clerk",show_all_users_path(role: "clerk"),class: (user_role=="clerk")? "checked_radio" : "users_radio_tag", name:"role"%>
+    <%= link_to "Customer",show_all_users_path(role: "customer"),class: (user_role=="customer")? "checked_radio" : "users_radio_tag", name:"role"%>
+  <div>
+
+  <div class="container padding_top">
+    <% unless user_role == "customer"%>
+      <div class="row users_list admin-add-newuser">
+        <p><%= link_to "+ Add #{user_role}","#",class:"admin-add-newuser-link"%></p>
+      </div>
+    <% end %>
+    <% @users.each do |user| %>
+      <div class="row users_list">
+        <% unless user_role == "customer"%>
+          <p style="float: right">
+            <%=link_to "Edit", "#" %>
+            <%= link_to "Delete", "#"  unless user.id == 1%>
+          </p>
+        <%end%>
+        <p> Name : <%= user.first_name + user.last_name%></p>
+        <p> Role : <%= user.role %> </p>
+        <P> Email : <%= user.email%> </p>
+      </div>
+    <%end%>
+  </div>
+</div>

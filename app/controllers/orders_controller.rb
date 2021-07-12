@@ -2,11 +2,18 @@ class OrdersController < ApplicationController
   skip_before_action :ensure_customer_role,only: [:create]
   skip_before_action :ensure_admin_role,except: [:create]
   def create
-    new_order = Order.new(
-      user_id: @current_user.id,
-      address_id: params[:address],
-      created_at: DateTime.now()
-    )
+    if(@current_user.role=="clerk")
+      new_order = Order.new(
+        user_id: @current_user.id,
+        created_at: DateTime.now()
+      )
+    else
+      new_order = Order.new(
+        user_id: @current_user.id,
+        address_id: params[:address],
+        created_at: DateTime.now()
+      )
+    end
 
     if(new_order.save)
       redirect_to order_items_path(order_id: new_order.id)

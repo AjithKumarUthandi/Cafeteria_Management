@@ -35,6 +35,7 @@
         <div class="subtotal">
           <br><br>
           <%= form_with url: orders_path do |form| %>
+            <%if @current_user.role != "clerk"%>
               <p class="selctTitle-text">Address:</p>
               <% if Address.isUserHasAddress(@current_user.id)==0 %>
                 <%= link_to  "Add address", new_address_path ,type:"button", class: "addAddress-cart" %>
@@ -46,11 +47,12 @@
                   options_for_select(@current_user.addresses.collect{ |add| ["#{add.door_no}, #{add.address.capitalize()}, #{add.city.capitalize()} : #{add.postal_code}", add.id] }, class:"optionAddress-section"),
                   {}, { :class => 'selectAddress-section' })
                 %>
-                <p class="selctTitle-text">Payment:</p>
-                <%= select_tag "payment", raw("<option>Cash only</option>"), class:"selectPayment-section", disabled: true%>
-                <%= form.submit "Place Order", class: "cart-button"  %>
               <%end%>
             <%end%>
+            <p class="selctTitle-text">Payment:</p>
+            <%= select_tag "payment", raw("<option>Cash only</option>"), class:"selectPayment-section", disabled: true%>
+            <%= form.submit "Place Order", class: "cart-button"  %>
+          <%end%>
         </div>
       </div>
     <% end %>

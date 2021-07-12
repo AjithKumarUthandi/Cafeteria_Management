@@ -50,6 +50,7 @@
         <div id="mySidenav" class="sidenav">
           <%= link_to "Menus",admin_menu_path,class:"hoverlink menu"%>
           <%= link_to "Order",admin_order_path,class:"hoverlink order"%>
+          <%= link_to "Users",show_all_users_path(role: "admin"),class:"hoverlink user" %>
           <%= link_to "Log_out",destroy_session_path, method: "delete",class:"hoverlink log_out"%>
         </div>
       </div>
@@ -57,13 +58,18 @@
         <nav class="navbar fixed-top  navbar-dark bg-dark">
           <%= link_to "SI", "/", class: "navbar-brand title-style"%>
           <% if @current_user %>
-            <div class="dropdown position-section">
-              <button class="dropbtn"><%= @current_user.first_name %></button>
-              <div class="dropdown-content" >
-                <%= link_to "Profile", profile_user_path%>
-                <%= link_to "Log-out", destroy_session_path, method: "delete" %>
+            <%if @current_user.role == "clerk"%>
+              <%= link_to "Orders",admin_order_path,class:"clerkorder"%>
+              <%= link_to "Log-out", destroy_session_path, method: "delete",class:"clerklog_out" %>
+            <% else %>
+              <div class="dropdown position-section">
+                <button class="dropbtn"><%= @current_user.first_name %></button>
+                <div class="dropdown-content" >
+                  <%= link_to "Profile", profile_user_path%>
+                  <%= link_to "Log-out", destroy_session_path, method: "delete" %>
+                </div>
               </div>
-            </div>
+            <%end%>
           <% elsif request.path!="/signin"%>
             <%= link_to "log_in", new_sessions_path, class: "btn btn-primary position-section"%>
           <% end %>

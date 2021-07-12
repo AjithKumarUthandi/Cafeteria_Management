@@ -19,4 +19,8 @@ class User < ApplicationRecord
     end
     return true;
   end
+
+  def self.getUsersByRole(role)
+    where("role = ? and archive_at is null",role)
+  end
 end

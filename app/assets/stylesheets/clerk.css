@@ -1,0 +1,31 @@
+.clerkorder{
+  color: white;
+  padding: 14px;
+  font-size: 18px;
+  text-decoration: none;
+  border: 1px solid rgb(16, 93, 180);
+  margin-left:-1100px;
+  background-color: rgb(16, 93, 180);
+  border-radius: 5px;
+}
+
+.clerkorder:hover{
+  color: white;
+  font-size: 20px;
+}
+
+.clerklog_out{
+  text-decoration: none;
+  border: 1px solid red;
+  background-color: red;
+  padding: 14px;
+  font-size: 18px;
+  color: white;
+  border-radius: 5px;
+  margin-right: 3px;
+}
+
+.clerklog_out:hover{
+  color: white;
+  font-size: 20px;
+}

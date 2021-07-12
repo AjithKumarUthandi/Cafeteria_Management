@@ -1,0 +1,56 @@
+.show_users{
+  margin:200px;
+}
+.role_field{
+  padding: 10px;
+  padding-left: 0px;
+}
+
+.users_radio_tag{
+  border: 1px solid black;
+  text-decoration: none;
+  margin-right:0 ;
+  padding:10px;
+
+}
+
+
+.users_radio_tag:hover{
+  cursor: pointer;
+}
+
+.checked_radio {
+  background-color: rgb(27, 31, 255);
+  color: white;
+  padding:10px;
+  text-decoration: none;
+  padding-right: 10px;
+}
+.checked_radio:hover{
+  color: white;
+}
+
+.users_list {
+  border: 1px solid rgb(75, 75, 75);
+  padding: 20px;
+  background-color: ghostwhite;
+  display: block;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+}
+
+.users_list > p{
+  padding: 5px;
+}
+
+.admin-add-newuser{
+  background-color: rgb(47, 243, 47);
+}
+
+.admin-add-newuser-link{
+  text-decoration: none;
+  color: white;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  padding-left: 45%;
+}

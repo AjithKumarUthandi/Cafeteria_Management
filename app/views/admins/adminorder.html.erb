@@ -16,17 +16,24 @@
         <button class="accordion-button collapsed orderAccordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=order.id%>" aria-expanded="false" aria-controls="flush-collapse<%=order.id%>">
           <div class="flexDisplay">
             <p class="orderId-text"> Order id: #<%= order.id%> </p>
-            <% if order.delivered_at %>
-              <div class="flexDisplay delivery_date-text">Delivered on: <p class="delivery_date"><%=order.delivered_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
-            <% elsif order.ordercancel_at%>
-              <div class="flexDisplay delivery_date-text">Canceled_at: <p class="cancel_date"><%=order.ordercancel_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
-            <%else%>
-              <p class="deliverd-status">Status: <p class="deliverd-status pendingStatus">Pending<p></p>
-            <% end %>
+            <%unless User.find(order.user_id).role == "clerk"%>
+              <% if order.delivered_at %>
+                <div class="flexDisplay delivery_date-text">Delivered on: <p class="delivery_date"><%=order.delivered_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
+              <% elsif order.ordercancel_at%>
+                <div class="flexDisplay delivery_date-text">Canceled_at: <p class="cancel_date"><%=order.ordercancel_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
+              <%else%>
+                <p class="deliverd-status">Status: <p class="deliverd-status pendingStatus">Pending<p></p>
+              <% end %>
+            <%end%>
           </div>
           <div class="orderdetails-text">
-            <%address = Address.find(order.address_id)%>
-            <%= "#{address.door_no}, #{address.address}, #{address.city} : #{address.postal_code}" %>
+            <%if User.find(order.user_id).role == "clerk"%>
+              <p style="color: red; margin-bottom:10px"> Walkin customer </p>
+              <p> Billed_by: <%= " ##{order.user_id}" %> </p>
+            <%else%>
+              <%address = Address.find(order.address_id)%>
+              <%= "#{address.door_no}, #{address.address}, #{address.city} : #{address.postal_code}" %>
+            <%end%>
           </div>
           <div class="orderdetails-text flexDisplay">
              <p class="order_at "> Ordered_at: </p> <%= order.created_at.to_s(:long)%>
@@ -36,7 +43,7 @@
           <%end%>
           <p style="color:green" class="orderdetails-text"> View details </p>
         </button>
-        <% unless order.delivered_at || order.ordercancel_at %>
+        <% unless order.delivered_at || order.ordercancel_at || User.find(order.user_id).role == "clerk" %>
           <div class="adminorderbutton">
             <%= link_to  "complete", complete_order_path(order.id),method: :patch ,class:"orderComplete" %>
             <button type="button" class="btn btn-primary orderCancel" data-bs-toggle="modal" data-bs-target="#orderCancelModal" data-bs-whatever="<%=order.id%>">Cancel</button>

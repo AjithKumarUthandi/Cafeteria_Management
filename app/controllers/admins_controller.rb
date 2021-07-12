@@ -10,4 +10,8 @@ class AdminsController < ApplicationController
 
   def order
   end
+
+  def show_all_users
+    @users=User.getUsersByRole(params[:role])
+  end
 end
