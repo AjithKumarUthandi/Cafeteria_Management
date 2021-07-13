@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     )
 
     if (User.valid_email(params[:email]) && new_user.save)
-      if role=="admin" || role=="clerk"
+      if @current_user.role=="admin"
         flash[:info] = "Added new #{role}"
         redirect_back(fallback_location: "/")
       else
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       if(flash[:error] =="")
         flash[:error]="email name aldready exist"
       end
-      if(role=="admin" || role=="clerk")
+      if @current_user.role=="admin"
         redirect_back(fallback_location: "/")
       else
         redirect_to "/users/new"

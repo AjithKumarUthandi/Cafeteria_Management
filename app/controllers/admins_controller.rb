@@ -15,7 +15,13 @@ class AdminsController < ApplicationController
   end
 
   def show_all_users
-    @users=User.getUsersByRole(params[:role])
+    @role = params[:role]
+    users=User.getUsersByRole(@role)
+    if(!users.empty?)
+      @users=users
+    else
+      @users=nil
+    end
   end
 
   def date_search
