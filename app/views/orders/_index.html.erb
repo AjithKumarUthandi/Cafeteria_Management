@@ -1,5 +1,5 @@
 <div class="accordion accordion-flush" id="accordionFlushExample" style="background-color: aliceblue;">
-  <% @current_user.orders.order("delivered_at DESC NULLS FIRST , ordercancel_at DESC NULLS FIRST").each do |order| %>
+  <% @current_user.orders.order("delivered_at DESC NULLS FIRST, id DESC").each do |order| %>
     <div class="accordion-item orderAccordion-item">
       <h2 class="accordion-header" id="flush-heading<%=order.id%>">
         <button class="accordion-button collapsed orderAccordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=order.id%>" aria-expanded="false" aria-controls="flush-collapse<%=order.id%>">
