@@ -1,6 +1,6 @@
 
 <div class="show_users">
-  <% user_role = @users.first.role%>
+  <% user_role = @users.first.role if @users.nil?%>
   <div class="role_field">
     <%= link_to "Admin",show_all_users_path(role: "admin"),class: (user_role=="admin")? "checked_radio" : "users_radio_tag", name:"role"%>
     <%= link_to "Clerk",show_all_users_path(role: "clerk"),class: (user_role=="clerk")? "checked_radio" : "users_radio_tag", name:"role"%>
