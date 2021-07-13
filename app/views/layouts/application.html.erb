@@ -59,7 +59,7 @@
           <%= link_to "SI", "/", class: "navbar-brand title-style"%>
           <% if @current_user %>
             <%if @current_user.role == "clerk"%>
-              <%= link_to "Orders",admin_order_path,class:"clerkorder"%>
+              <%= link_to "Orders",admins_path,class:"clerkorder"%>
               <%= link_to "Log-out", destroy_session_path, method: "delete",class:"clerklog_out" %>
             <% else %>
               <div class="dropdown position-section">

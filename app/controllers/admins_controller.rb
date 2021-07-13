@@ -22,7 +22,9 @@ class AdminsController < ApplicationController
     to = params[:to_date]
     unless(from.empty? && to.empty?)
       @orders = Order.where("created_at >= ? AND created_at <= ?", from, to.to_datetime.end_of_day).order("delivered_at DESC NULLS FIRST", id: :desc)
+      flash[:error]=nil
     else
+      flash[:error] = "Enter valid date"
       @orders = Order.order("delivered_at DESC NULLS FIRST, id DESC")
     end
       render "index"
@@ -53,6 +55,7 @@ class AdminsController < ApplicationController
       when "walkin"
         @orders = Order.where("address_id is NULL").order(id: :desc)
     end
+    flash[:error]=nil
     @status_order = params[:list]
     render "index"
   end

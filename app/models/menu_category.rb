@@ -16,7 +16,7 @@ class MenuCategory < ApplicationRecord
   end
 
   def self.getactive_menuCategories
-    where("active = ? and archive_at is null", true)
+    where("active = ? and archive_at is null", true).order(id: :desc)
   end
 
   def self.get_menuCategories
