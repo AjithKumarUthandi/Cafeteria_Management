@@ -48,9 +48,9 @@
 
       <div class="padding_top" style="position: fixed">
         <div id="mySidenav" class="sidenav">
-          <%= link_to "Menus",admin_menu_path,class:"hoverlink menu"%>
-          <%= link_to "Order",admin_order_path,class:"hoverlink order"%>
-          <%= link_to "Users",show_all_users_path(role: "admin"),class:"hoverlink user" %>
+          <%= link_to "Orders","/",class:"#{(request.path == admins_path)? 'stablelink' : 'hoverlink'} order"%>
+          <%= link_to "Menus",admin_menu_path,class:"#{(request.path == admin_menu_path)? 'stablelink' : 'hoverlink'} menu"%>
+          <%= link_to "Users",show_all_users_path(role: "admin"),class:"#{(request.path == show_all_users_path)? 'stablelink' : 'hoverlink'} user" %>
           <%= link_to "Log_out",destroy_session_path, method: "delete",class:"hoverlink log_out"%>
         </div>
       </div>

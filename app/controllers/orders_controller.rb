@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
       new_order = Order.new(
         user_id: @current_user.id,
         created_at: DateTime.now()
+        delivered_at: DateTime.now()
       )
     else
       new_order = Order.new(

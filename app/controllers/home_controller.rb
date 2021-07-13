@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   def index
     current_user
     if(@current_user && @current_user.role=="admin")
-      render "admins/menu"
+      redirect_to admins_path
     end
   end
 end

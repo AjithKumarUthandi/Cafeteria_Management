@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "/" => "home#index"
+  get "/" => "home#index",as: :root
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users
   get "/edit" => "users#edit", as: :edit
@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   #admin
   get "/adminmenus" => "admins#menu", as: :admin_menu
   get "/adminmenuitems" => "admins#menu_item", as: :admin_menu_items
-  get "/adminorders" => "admins#adminorder", as: :admin_order
   get "/show_all_users" => "admins#show_all_users", as: :show_all_users
+  get "/admins" => "admins#index", as: :admins
+  get "/search_by_date" => "admins#date_search", as: :search_by_date
+  get "/search_by_order" => "admins#order_search", as: :search_by_order
+  get "/search_by_lists" => "admins#list_search", as: :search_by_lists
 end

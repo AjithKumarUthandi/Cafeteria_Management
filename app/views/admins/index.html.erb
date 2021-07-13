@@ -1,5 +1,33 @@
-
-<div class="accordion accordion-flush border-shadow adminorder-view" id="accordionFlushExample">
+<div style="position:fixed;top:200px;right:50px ">
+  <div>
+    <p>Search by Date</p>
+    <%=form_with url: search_by_date_path, method: :get do | form | %>
+      <%=form.date_field :from_date%>
+      <%=form.date_field :to_date%>
+      <%=form.submit "Search" %>
+    <%end%>
+  </div>
+  <hr>
+  <div>
+    <br>
+    <%= form_with url: search_by_order_path, method: :get do | form |%>
+      <%=form.number_field :search, placeholder:'Search by order id', min:1 %>
+      <%=form.submit "Search" %>
+    <%end%>
+  </div>
+  <hr>
+  <div>
+    <br>
+    <%=form_with url: search_by_lists_path, method: :get do |form| %>
+      <label>Show Order</label>
+        <%= form.select(:list, options_for_select([["All Orders", "allorders"],["Pending" , "pending"],["Delivered" , "delivered"], ["Cancel" , "cancel"], ["walk-in-customer", "walkin"]] , @status_order),
+            {}, { :class => 'btn-outline-dark selection-user', onchange: 'this.form.submit();' }  )
+        %>
+      </label>
+    <%end%>
+  </div>
+</div>
+<div class="accordion accordion-flush border-shadow adminorder-view"  style="width: 60%;" id="accordionFlushExample">
   <br><br><br><br><br><br><br>
   <% if flash[:error] %>
     <p class="Flash-error">
@@ -10,13 +38,16 @@
       <%= flash[:info] %>
     </p>
   <% end %>
-  <% Order.order("delivered_at DESC NULLS FIRST , ordercancel_at DESC NULLS FIRST").each do |order| %>
+  <% @orders.each do |order| %>
+    <%user = User.find(order.user_id)%>
     <div class="accordion-item orderAccordion-item">
       <h2 class="accordion-header" id="flush-heading<%=order.id%>">
         <button class="accordion-button collapsed orderAccordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%=order.id%>" aria-expanded="false" aria-controls="flush-collapse<%=order.id%>">
           <div class="flexDisplay">
-            <p class="orderId-text"> Order id: #<%= order.id%> </p>
-            <%unless User.find(order.user_id).role == "clerk"%>
+            <p class="orderId-text"> Order id: #<%= order.id%> :
+              <p style="font-weight:900; font-size:20px;padding-left:0.5rem"> <%= user.first_name+user.last_name%> </p>
+            </p>
+            <%unless user.role == "clerk"%>
               <% if order.delivered_at %>
                 <div class="flexDisplay delivery_date-text">Delivered on: <p class="delivery_date"><%=order.delivered_at.strftime("%b %d, %Y %l:%M %P")%></p></div>
               <% elsif order.ordercancel_at%>
@@ -27,7 +58,7 @@
             <%end%>
           </div>
           <div class="orderdetails-text">
-            <%if User.find(order.user_id).role == "clerk"%>
+            <%if user.role == "clerk"%>
               <p style="color: red; margin-bottom:10px"> Walkin customer </p>
               <p> Billed_by: <%= " ##{order.user_id}" %> </p>
             <%else%>
