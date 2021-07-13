@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-  skip_before_action :ensure_user_logged_in, :ensure_customer_role
+  skip_before_action :ensure_user_logged_in, :ensure_customer_role, :ensure_clerk_role
 
   def index
     current_user

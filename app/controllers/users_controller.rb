@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   skip_before_action :ensure_admin_role,except: [:profile]
   skip_before_action :ensure_customer_role
 
-
   def new
     render "users/new"
   end

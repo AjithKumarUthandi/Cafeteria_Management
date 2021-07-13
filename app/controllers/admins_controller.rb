@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   skip_before_action :ensure_admin_role
+  skip_before_action :ensure_clerk_role, except: [:menu, :menu_item, :show_all_users]
 
   def menu
   end

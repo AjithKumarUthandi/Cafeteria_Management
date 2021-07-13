@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
   skip_before_action :ensure_customer_role,only: [:create]
   skip_before_action :ensure_admin_role,except: [:create]
+  skip_before_action :ensure_clerk_role
   def create
     if(@current_user.role=="clerk")
       new_order = Order.new(
         user_id: @current_user.id,
-        created_at: DateTime.now()
+        created_at: DateTime.now(),
         delivered_at: DateTime.now()
       )
     else
@@ -17,7 +18,11 @@ class OrdersController < ApplicationController
     end
 
     if(new_order.save)
-      redirect_to order_items_path(order_id: new_order.id)
+      if(@current_user.role=="clerk")
+        redirect_back(fallback_location: "/")
+      else
+        redirect_to order_items_path(order_id: new_order.id)
+      end
     else
       flash[:error] = new_order.errors.full_messages.join(", ")
       redirect_to "/"

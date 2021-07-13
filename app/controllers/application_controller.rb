@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :ensure_user_logged_in, :ensure_admin_role, :ensure_customer_role
+  before_action :ensure_user_logged_in, :ensure_admin_role, :ensure_customer_role, :ensure_clerk_role
 
   def ensure_user_logged_in
     unless current_user
@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
 
   def ensure_admin_role
     if current_user.role == "admin"
+      error
+    end
+  end
+
+  def ensure_clerk_role
+    if current_user.role == "clerk"
       error
     end
   end
