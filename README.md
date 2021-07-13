@@ -8,9 +8,10 @@
   email:customer@email.com
   password:customer
 
-In my application there are two users
+In my application there are three users
   -Customer
   -Admin(Owner)
+  -Clerk
 
 ## Home page
 ![Common-homepageImage](/images/common-homepage.png)
@@ -91,3 +92,21 @@ In my application there are two users
   ![OrdersImage](images/admin/admin-orders.png)
   -click view-item and see order items
   ![Order-itemImage](images/admin/admin-view-orderitems.png)
+
+  ## Manage User
+  -First Admin constant. No one delete the user.
+  -Other Admins can edit and delete other admins.
+  ![ManageAdmin](images/admin/show_admin.png)
+  -Admin only add,edit and delete clerk.
+  ![ManageClerk](images/admin/show_clerk.png)
+  -Admin can only view customers
+  ![ViewCustomer](images/admin/show_customer.png)
+
+## Clerk
+
+  ## Clerk Home page
+  -Clerk home page as same as customer home page
+  -But this for Walkin customer. so in cart do not asking address
+  ![ClerHomePage](images/clerk_homepage.png)
+  -clerk view order, complete and cancel orders
+  ![Clerkorder](images/admin/admin-order.png)
