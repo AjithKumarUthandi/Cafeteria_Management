@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in,only: [:new, :create]
-  skip_before_action :ensure_admin_role,except: [:profile, :destroy]
+  skip_before_action :ensure_admin_role,except: [:profile]
   skip_before_action :ensure_customer_role
 
 
@@ -9,23 +9,34 @@ class UsersController < ApplicationController
   end
 
   def create
+    role =  params[:role]
     new_user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
       phone_number: params[:phone_number],
+      role: role,
       email: params[:email],
       password: params[:password],
     )
 
     if (User.valid_email(params[:email]) && new_user.save)
-      session[:current_user_id] = new_user.id
-      redirect_to "/"
+      if role=="admin" || role=="clerk"
+        flash[:info] = "Added new #{role}"
+        redirect_back(fallback_location: "/")
+      else
+        session[:current_user_id] = new_user.id
+        redirect_to "/"
+      end
     else
       flash[:error] = new_user.errors.full_messages.join(", ")
       if(flash[:error] =="")
         flash[:error]="email name aldready exist"
       end
-      redirect_to "/users/new"
+      if(role=="admin" || role=="clerk")
+        redirect_back(fallback_location: "/")
+      else
+        redirect_to "/users/new"
+      end
     end
   end
 
@@ -33,9 +44,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = @current_user
+    user = User.find(params[:id])
     user_parameters = user_params
-    if( !User.valid_email(user_parameters["email"]) && @current_user.update( user_params) )
+    if( !User.valid_email(user_parameters["email"]) && user.update( user_params) )
       flash[:info]="Succeflly update"
     else
       flash[:error] = "Invalid Input"
@@ -52,17 +63,30 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user && user.authenticate(params[:password])
-      if(@current_user.role == user.role)
-        session[:current_user_id] = nil
-        @current_user = nil
+    if(@current_user.role == "customer")
+      if user && user.authenticate(params[:password])
+        if(@current_user.role == user.role)
+          session[:current_user_id] = nil
+          @current_user = nil
+        end
+        user.archive_at = Time.now()
+        user.save!
+        redirect_to "/signin"
+      else
+        flash[:error] = "Password is wrong"
+        redirect_back(fallback_location: "/")
       end
-      user.archive_at = Time.now()
-      redirect_to "/signin"
-    else
-      flash[:error] = "Password is wrong"
+    elsif(@current_user.role == "admin")
+      if(user)
+        user.archive_at = Time.now()
+        user.save!
+        flash[:info] = "Deleted"
+      else
+        flash[:error] = user.errors.full_messages.join(", ")
+      end
       redirect_back(fallback_location: "/")
     end
+
   end
 
   def update_password

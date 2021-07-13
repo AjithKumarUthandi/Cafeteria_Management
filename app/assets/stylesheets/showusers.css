@@ -43,14 +43,44 @@
   padding: 5px;
 }
 
-.admin-add-newuser{
-  background-color: rgb(47, 243, 47);
-}
 
 .admin-add-newuser-link{
-  text-decoration: none;
-  color: white;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 20px;
-  padding-left: 45%;
+  border: 0;
+  padding: 20px;
+  background-color:  rgb(47, 243, 47);
+}
+
+.admin-add-newuser-link:hover{
+  background-color: rgb(38, 252, 38);
+}
+
+
+.user_delete-button{
+  border: 1px solid rgb(253, 16, 16);
+  background-color: rgb(253, 16, 16);
+  color: white;
+  padding : 5px;
+  text-decoration: none;
+  float: right;
+  margin: 2px;
+  border-radius: 5px;
+  box-shadow: 2px 3px thistle;
+}
+
+.user_edit-button{
+  border: 1px solid #0d6efd;
+  background-color: #0d6efd;
+  color: white;
+  padding : 5px;
+  float: right;
+  margin: 2px;
+  border-radius: 5px;
+  box-shadow: 2px 3px thistle;
+}
+
+.user_delete-button:hover, .user_edit-button:hover{
+  cursor: pointer;
+  color: black;
 }

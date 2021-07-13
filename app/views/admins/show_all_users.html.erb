@@ -1,29 +1,118 @@
+
 <div class="show_users">
   <% user_role = @users.first.role%>
   <div class="role_field">
     <%= link_to "Admin",show_all_users_path(role: "admin"),class: (user_role=="admin")? "checked_radio" : "users_radio_tag", name:"role"%>
     <%= link_to "Clerk",show_all_users_path(role: "clerk"),class: (user_role=="clerk")? "checked_radio" : "users_radio_tag", name:"role"%>
     <%= link_to "Customer",show_all_users_path(role: "customer"),class: (user_role=="customer")? "checked_radio" : "users_radio_tag", name:"role"%>
+    <p style="padding-top:20px"> <%= @users.count %> Users</p>
   <div>
 
   <div class="container padding_top">
     <% unless user_role == "customer"%>
       <div class="row users_list admin-add-newuser">
-        <p><%= link_to "+ Add #{user_role}","#",class:"admin-add-newuser-link"%></p>
+        <button type="button" class="admin-add-newuser-link" data-bs-toggle="modal" data-bs-target="#addNewUser">
+          <%= "+ Add #{user_role}" %>
+        </button>
       </div>
     <% end %>
-    <% @users.each do |user| %>
+    <% @users.sort.each do |user| %>
       <div class="row users_list">
-        <% unless user_role == "customer"%>
-          <p style="float: right">
-            <%=link_to "Edit", "#" %>
-            <%= link_to "Delete", "#"  unless user.id == 1%>
-          </p>
+        <% unless user_role == "customer" || user.id==1%>
+          <div>
+            <%= link_to 'Delete', user_path(user.id), method: :delete,class:"user_delete-button", data: {confirm: 'Are you sure?'} %>
+            <button type="button" class="user_edit-button" data-bs-toggle="modal" data-bs-target="#edituser<%=user.id%>">
+                Edit
+            </button>
+          </div>
         <%end%>
         <p> Name : <%= user.first_name + user.last_name%></p>
         <p> Role : <%= user.role %> </p>
         <P> Email : <%= user.email%> </p>
       </div>
+
+      <div class="modal fade" id="edituser<%=user.id%>" tabindex="-1" aria-labelledby="edituser<%=user.id%>Label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="edituser<%=user.id%>Label"> Edit <%= user_role %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= form_with(model: user) do |form| %>
+                <div class="editprofile-section">
+                  <div>
+                    <p><%= form.label :first_name, class:"log-inLabel ariel_family" %></p>
+                    <%= form.text_field :first_name,id: "firstname",class: "input-section" %>
+                  </div>
+                  <div>
+                    <p><%= form.label :last_name, class:"log-inLabel ariel_family" %></p>
+                    <%= form.text_field :last_name,id: "lastname",class: "input-section" %>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <p><%= form.label :email, class:"log-inLabel ariel_family" %></p>
+                  <%= form.text_field :email,class: "input-section" %>
+                </div>
+                <hr>
+                <div>
+                  <p><%= form.label :phone_number, class:"log-inLabel ariel_family" %></p>
+                  <%= form.number_field :phone_number,class: "input-section" %>
+                </div>
+                <hr>
+                <%= form.submit :update, class: "loginButton" %>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <%end%>
+  </div>
+
+  <div class="modal fade" id="addNewUser" tabindex="-1" aria-labelledby="addNewUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNewUserLabel"> Add new <%= user_role %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with url: users_path do |form| %>
+            <div class="inputContainer">
+              <p class="log-inLabel ariel_family">First name * </p>
+              <%= form.text_field :first_name, class: "input-section", autofocus: true, placeholder: "First name",required:true %>
+            </div>
+            <div class="inputContainer">
+              <p class="log-inLabel ariel_family">Last name</p>
+              <%= form.text_field :last_name, class: "input-section",placeholder: "Last name"%>
+            </div>
+            <div class="inputContainer">
+              <p class="log-inLabel ariel_family">Email *</p>
+              <%= form.email_field :email, class: "input-section", placeholder: "xxx@email.com",required:true %>
+            </div>
+            <div class="inputContainer">
+              <p class="log-inLabel ariel_family">Phone number *</p>
+              <%= form.number_field :phone_number, class: "input-section", placeholder: "xxx-xxx-xxxx",required:true%>
+            </div>
+            <div class="inputContainer">
+              <p class="log-inLabel ariel_family">Password *</p>
+              <%= form.password_field :password, class: "input-section", placeholder: "must be 8 to 16 letters", pattern:"[A-Za-z0-9_]{8,16}", title:"Eight or more characters",required:true %>
+            </div>
+            <%= hidden_field_tag :role , user_role%>
+            <div class="inputContainer">
+              <%= form.submit "Sign-up!", class: "loginButton" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"> Add </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
