@@ -1,9 +1,13 @@
 <div style="position:fixed;top:200px;right:10px">
   <div>
-    <p>Search by Date</p>
+    <br>
     <%=form_with url: search_by_date_path, method: :get do | form | %>
-      <%=form.date_field :from_date%>
-      <%=form.date_field :to_date%>
+      <p> Search by customer with date range</p>
+      <p><%=form.number_field :customer_id, placeholder:'Enter customer id(optional)'%></p>
+      <br>
+      <p>Search by Date</p>
+      <%=form.date_field :from_date %>
+      <%=form.date_field :to_date %>
       <%=form.submit "Search" %>
     <%end%>
   </div>

@@ -25,14 +25,25 @@ class AdminsController < ApplicationController
   end
 
   def date_search
+    customer_id = params[:customer_id]
     from = params[:from_date]
     to = params[:to_date]
-    unless(from.empty? && to.empty?)
-      @orders = Order.where("created_at >= ? AND created_at <= ?", from, to.to_datetime.end_of_day).order("delivered_at DESC NULLS FIRST", id: :desc)
-      flash[:error]=nil
+    unless(customer_id.empty?)
+      unless(from.empty? && to.empty?)
+        @orders = User.find(customer_id).orders.where("created_at >= ? AND created_at <= ?", from, to.to_datetime.end_of_day).order("delivered_at DESC NULLS FIRST", id: :desc)
+        flash[:error]=nil
+      else
+        @orders = User.find(customer_id).orders.order("delivered_at DESC NULLS FIRST, id DESC")
+        flash[:error] = nil
+      end
     else
-      flash[:error] = "Enter valid date"
-      @orders = Order.order("delivered_at DESC NULLS FIRST, id DESC")
+      unless(from.empty? && to.empty?)
+        @orders = Order.where("created_at >= ? AND created_at <= ?", from, to.to_datetime.end_of_day).order("delivered_at DESC NULLS FIRST", id: :desc)
+        flash[:error]=nil
+      else
+        flash[:error] = "Enter valid detial"
+        @orders = Order.order("delivered_at DESC NULLS FIRST, id DESC")
+      end
     end
       render "index"
   end
